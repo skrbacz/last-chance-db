@@ -1,3 +1,4 @@
+
 package com.example.lastchancedb
 
 import android.os.Bundle
@@ -9,9 +10,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.lastchancedb.database.DatabaseConnection
-import com.example.lastchancedb.database.user.UserQueries
 import com.example.lastchancedb.database.vaccination.VaccQueries
 import com.example.lastchancedb.database.vaccination.Vaccination
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -23,7 +24,9 @@ class MainActivity : AppCompatActivity() {
     private var vaccNameED: EditText?= null
     private var daysUntilNextDoseED: EditText?=null
     private var descriptionED: EditText?=null
-    override fun onCreate(savedInstanceState: Bundle?) {
+
+    private val couritineScoupe= CoroutineScope(Dispatchers.Main)
+        override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
@@ -44,15 +47,13 @@ class MainActivity : AppCompatActivity() {
             val vaccName = vaccNameED?.text.toString()
             val daysUntilNextDose = daysUntilNextDoseED?.text.toString().toInt()
             val description = descriptionED?.text.toString()
-            val vacc= Vaccination(vaccName,daysUntilNextDose= 10,description)
+            val vacc= Vaccination(vaccName,daysUntilNextDose,description)
 
-            runBlocking { launch(Dispatchers.IO){
+            couritineScoupe.launch {
                 insertVacc(vacc)
-            } }
+            }
         }
-
     }
-
     private suspend fun insertVacc(vaccination: Vaccination) {
         withContext(Dispatchers.IO){
             val connection= DatabaseConnection.getConnection()
@@ -66,7 +67,6 @@ class MainActivity : AppCompatActivity() {
                 }else{
                     Toast.makeText(this@MainActivity,"Vaccination insertion failed",Toast.LENGTH_SHORT).show()
                 }
-
             }
         }
     }

@@ -47,7 +47,7 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     implementation(libs.bcrypt)
-
-    implementation("mysql:mysql-connector-java:5.1.49")
+    implementation("mysql:mysql-connector-java:5.1.26")
+    implementation("androidx.work:work-runtime-ktx:2.9.0")
 
 }
