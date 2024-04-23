@@ -2,4 +2,14 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="main_pink">#DE4D86</color>
+    <color name="shade_pink">#cf266a</color>
+    <color name="main_yellow">#FEC601</color>
+    <color name="shade_yellow">#dfaf01</color>
+    <color name="main_cyan">#03989E</color>
+    <color name="background_white">#EFF7F6</color>
+
+    <color name="snackbar_success">#bfcc94</color>
+    <color name="snackbar_failure">#e6aace</color>
 </resources>

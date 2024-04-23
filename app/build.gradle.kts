@@ -50,4 +50,7 @@ dependencies {
     implementation("mysql:mysql-connector-java:5.1.26")
     implementation("androidx.work:work-runtime-ktx:2.9.0")
 
+
+    implementation(libs.material.v150)
+
 }

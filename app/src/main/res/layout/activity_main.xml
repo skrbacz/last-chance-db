@@ -5,52 +5,45 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/white">
 
-    <FrameLayout
-        android:layout_width="245dp"
-        android:layout_height="743dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginEnd="80dp"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="26dp"
+        android:layout_marginBottom="46dp"
+        android:backgroundTint="@color/main_pink"
+        android:clickable="true"
+        android:focusable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:srcCompat="@drawable/ic_fab_add" />
 
-        <EditText
-            android:id="@+id/vaccNameED"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="text"
-            android:hint="vaccination name"
-            android:layout_marginTop="100dp"/>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/scheduleVaccinationBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/button_gradient"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/addBtn"
+        app:layout_constraintEnd_toEndOf="@+id/addBtn"
+        app:srcCompat="@drawable/ic_fab_schedule" />
 
-        <EditText
-            android:id="@+id/descriptionED"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:gravity="start|top"
-            android:inputType="textMultiLine"
-            android:hint="description"
-            android:layout_marginTop="200dp"/>
-
-        <Button
-            android:id="@+id/executeBTN"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="execute"
-            android:layout_gravity="center"/>
-
-        <EditText
-            android:id="@+id/daysUntilNextDoseED"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="number"
-            android:hint="days until next dose"
-            android:layout_marginTop="150dp"/>
-
-    </FrameLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addVaccinationBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/button_gradient"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/scheduleVaccinationBtn"
+        app:layout_constraintEnd_toEndOf="@+id/scheduleVaccinationBtn"
+        app:srcCompat="@drawable/ic_fab_add_record" />
 </androidx.constraintlayout.widget.ConstraintLayout>
