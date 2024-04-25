@@ -46,4 +46,18 @@
         app:layout_constraintBottom_toTopOf="@+id/scheduleVaccinationBtn"
         app:layout_constraintEnd_toEndOf="@+id/scheduleVaccinationBtn"
         app:srcCompat="@drawable/ic_fab_add_record" />
+
+    <Button
+        android:id="@+id/goToMainAdmin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="114dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="115dp"
+        android:layout_marginBottom="627dp"
+        android:text="Go to main for admin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

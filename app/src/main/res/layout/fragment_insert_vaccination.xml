@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout4"
+    android:layout_width="match_parent"
+    android:layout_height="450dp"
+    tools:context=".admin_popups.vaccination.InsertVaccinationPopUp">
+
+
+    <LinearLayout
+        android:layout_width="409dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:gravity="center|top"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="Insert vaccination"
+            android:textSize="35sp" />
+
+        <EditText
+            android:id="@+id/vaccNameEDTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:ems="10"
+            android:hint="Name"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/intervalEDTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:hint="Interval to next dose"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/shortDescriptionEDTV"
+            android:layout_width="wrap_content"
+            android:layout_height="130dp"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="Short descrtiption"
+            android:inputType="textMultiLine" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Insert" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_syringe_filled"
+            android:layout_marginBottom="10dp"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,6 +7,10 @@ android {
     namespace = "com.example.lastchancedb"
     compileSdk = 34
 
+    viewBinding{
+        enable =  true
+    }
+
     defaultConfig {
         applicationId = "com.example.lastchancedb"
         minSdk = 24
@@ -42,6 +46,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.gridlayout)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

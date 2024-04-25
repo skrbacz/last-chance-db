@@ -1,6 +1,7 @@
 
 package com.example.lastchancedb
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.animation.Animation
@@ -23,32 +24,41 @@ class MainActivity : AppCompatActivity() {
     private var addButton: FloatingActionButton?=null
     private var addVaccinationBtn: FloatingActionButton?=null
     private var scheduleVaccinationBtn: FloatingActionButton?=null
+    private var goToAdmin: Button?=null
 
     private var clicked = false
 
     private val couritineScoupe= CoroutineScope(Dispatchers.Main)
         override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+            setContentView(R.layout.activity_main)
 
-        addButton= findViewById(R.id.addBtn)
-        addVaccinationBtn= findViewById(R.id.addVaccinationBtn)
-        scheduleVaccinationBtn= findViewById(R.id.scheduleVaccinationBtn)
+            addButton= findViewById(R.id.addBtn)
+            addVaccinationBtn= findViewById(R.id.addVaccinationBtn)
+            scheduleVaccinationBtn= findViewById(R.id.scheduleVaccinationBtn)
+            goToAdmin= findViewById(R.id.goToMainAdmin)
 
-
-         addButton?.setOnClickListener {
-             onAddButtonClicked()
-         }
-
-         scheduleVaccinationBtn?.setOnClickListener {
-            val showPopUp= QuestionScheduleAppointmentFragment()
-            showPopUp.show(supportFragmentManager,"QuestionScheduleAppointmentFragment")
-         }
+            goToAdmin?.setOnClickListener {
+                val intent= Intent(this@MainActivity, AdminMainActivity::class.java)
+                startActivity(intent)
+            }
 
 
-         addVaccinationBtn?.setOnClickListener {
-             Toast.makeText(this, "TODO: Add Vaccination", Toast.LENGTH_SHORT).show()
-         }
+            addButton?.setOnClickListener {
+                onAddButtonClicked()
+            }
+
+            scheduleVaccinationBtn?.setOnClickListener {
+                val showPopUp= QuestionScheduleAppointmentFragment()
+                showPopUp.show(supportFragmentManager,"QuestionScheduleAppointmentFragment")
+            }
+
+
+            addVaccinationBtn?.setOnClickListener {
+                Toast.makeText(this, "TODO: Add Vaccination", Toast.LENGTH_SHORT).show()
+            }
+
+        }
 
 
 
@@ -70,22 +80,6 @@ class MainActivity : AppCompatActivity() {
 //            }
 //        }
 //    }
-//    private suspend fun insertVacc(vaccination: Vaccination) {
-//        withContext(Dispatchers.IO){
-//            val connection= DatabaseConnection.getConnection()
-//            val userQueries = VaccQueries(connection)
-//            val result = userQueries.insertVacc(vaccination)
-//            connection.close()
-//
-//            withContext(Dispatchers.Main){
-//                if (result) {
-//                    Toast.makeText(this@MainActivity,"Vaccination inserted",Toast.LENGTH_SHORT).show()
-//                }else{
-//                    Toast.makeText(this@MainActivity,"Vaccination insertion failed",Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//        }
-    }
 
     private fun onAddButtonClicked() {
         setVisibility(clicked)
