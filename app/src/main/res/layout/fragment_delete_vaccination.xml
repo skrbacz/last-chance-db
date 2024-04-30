@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayout3"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="350dp"
     tools:context=".admin_popups.vaccination.DeleteVaccinationPopUp">
 
@@ -27,7 +28,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:inputType="none"
-            android:hint="PFIZER"
+            android:hint="VACCINATION NAME"
             android:textAlignment="center" />
 
 

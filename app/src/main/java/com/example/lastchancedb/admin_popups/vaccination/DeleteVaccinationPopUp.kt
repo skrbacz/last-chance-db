@@ -25,17 +25,19 @@ class DeleteVaccinationPopUp : DialogFragment() {
 
     private val couritineScoupe = CoroutineScope(Dispatchers.Main)
     private var vaccinations: Set<Vaccination?>? = null
-
     override fun onResume() {
         super.onResume()
 
         couritineScoupe.launch {
             vaccinations = VaccinationSuspendedFunctions.getAllVaccs()
-        }
 
-        val vaccNames = getVaccNames(vaccinations)
-        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.drop_down_item, vaccNames)
-        binding.adminVaccinationDeleteACTV.setAdapter(arrayAdapter)
+            binding.apply {
+                val vaccNames = getVaccNames(vaccinations)
+                val arrayAdapter =
+                    ArrayAdapter(requireContext(), R.layout.drop_down_item, vaccNames)
+                adminVaccinationDeleteACTV.setAdapter(arrayAdapter)
+            }
+        }
     }
 
     override fun onCreateView(

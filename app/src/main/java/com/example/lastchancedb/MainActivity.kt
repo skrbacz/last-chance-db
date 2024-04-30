@@ -7,12 +7,11 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Button
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.lastchancedb.popups.AddVaccinationRecordFragment
+import com.example.lastchancedb.popups.CalendarFragmentPopUp
 import com.example.lastchancedb.popups.QuestionScheduleAppointmentFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,9 +26,7 @@ class MainActivity : AppCompatActivity() {
     private var goToAdmin: Button?=null
 
     private var clicked = false
-
-    private val couritineScoupe= CoroutineScope(Dispatchers.Main)
-        override fun onCreate(savedInstanceState: Bundle?) {
+     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
             setContentView(R.layout.activity_main)
 
@@ -55,7 +52,8 @@ class MainActivity : AppCompatActivity() {
 
 
             addVaccinationBtn?.setOnClickListener {
-                Toast.makeText(this, "TODO: Add Vaccination", Toast.LENGTH_SHORT).show()
+                val showPopUp= AddVaccinationRecordFragment()
+                showPopUp.show(supportFragmentManager,"CalendarPopUp")
             }
 
         }

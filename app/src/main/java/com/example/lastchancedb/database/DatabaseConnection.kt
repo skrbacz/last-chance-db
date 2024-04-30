@@ -6,9 +6,9 @@ import java.sql.SQLException
 
 object DatabaseConnection {
 
-    private const val URL= "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11699918?useUnicode=true&characterEncoding=utf-8&serverTimezone=CET" //jdbc:mysql://localhost:3306/lastChanceDB?useUnicode=true&characterEncoding=utf-8&serverTimezone=CET
-    private const val USER = "sql11699918"
-    private const val PASS= "k8I1mKPhnQ"
+    private const val URL= "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11702015?useUnicode=true&characterEncoding=utf-8&serverTimezone=CET" //jdbc:mysql://localhost:3306/lastChanceDB?useUnicode=true&characterEncoding=utf-8&serverTimezone=CET
+    private const val USER = "sql11702015"
+    private const val PASS= "TnlplQPiEN"
 
     init{
         Class.forName("com.mysql.jdbc.Driver")

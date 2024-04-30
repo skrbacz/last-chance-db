@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
-    android:layout_height="350dp"
+    android:layout_height="250dp"
     android:background="@color/white"
     tools:context=".popups.QuestionScheduleAppointmentFragment">
 
@@ -12,7 +12,7 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="114dp"
+        android:layout_marginTop="40dp"
         android:text="Which dose of vaccination will this be?"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,14 +33,14 @@
         <Button
             android:id="@+id/firstDoseBtn"
             style="@style/Widget.Material3.Button.IconButton.Outlined"
-            android:layout_width="wrap_content"
+            android:layout_width="125dp"
             android:layout_height="wrap_content"
             android:text="First dose" />
 
         <Button
             android:id="@+id/nextDoseBtn"
             style="@style/Widget.Material3.Button.OutlinedButton"
-            android:layout_width="wrap_content"
+            android:layout_width="125dp"
             android:layout_height="wrap_content"
             android:text="Next dose" />
 
@@ -50,16 +50,15 @@
         android:id="@+id/submitBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="159dp"
-        android:layout_marginBottom="67dp"
-        android:text="Submit"
+
+        android:layout_marginTop="25dp"
         android:backgroundTint="@color/main_pink"
+        android:text="Submit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toggleButtonGroup" />
+        app:layout_constraintTop_toBottomOf="@+id/toggleButtonGroup"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

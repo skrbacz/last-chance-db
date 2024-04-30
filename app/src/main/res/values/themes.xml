@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.LastChanceDB" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/main_yellow</item>
+        <item name="colorPrimary">@color/main_cyan</item>
     </style>
 
     <style name="Theme.LastChanceDB" parent="Base.Theme.LastChanceDB" />

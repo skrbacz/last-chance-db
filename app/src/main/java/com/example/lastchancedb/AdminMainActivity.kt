@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.lastchancedb.admin_popups.user.DeleteUserPopUp
 import com.example.lastchancedb.admin_popups.vaccination.DeleteVaccinationPopUp
 import com.example.lastchancedb.admin_popups.vaccination.InsertVaccinationPopUp
 import com.example.lastchancedb.admin_popups.vaccination.UpdateVaccinationPopUp
@@ -19,8 +20,11 @@ import kotlinx.coroutines.launch
 
 class AdminMainActivity : AppCompatActivity() {
 
-    private lateinit var tableToggleGroup: MaterialButtonToggleGroup
+    private var toggleBtn: MaterialButtonToggleGroup?=null
 
+    private var vaccsBtn: Button?=null
+    private var usersBtn: Button?=null
+    private var vaccRecsBtn: Button?=null
     private var amountOfUsersTV: TextView? = null
     private var adminInsertBTN: Button? = null
     private var adminDeleteBTN: Button? = null
@@ -34,7 +38,8 @@ class AdminMainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_admin)
 
-        tableToggleGroup = findViewById(R.id.toggleButtonGroup)
+        toggleBtn = findViewById(R.id.toggleButtonGroup)
+
         amountOfUsersTV = findViewById(R.id.amountOfUsersTVADMIN)
         adminInsertBTN = findViewById(R.id.adminInsertBTN)
         adminDeleteBTN = findViewById(R.id.adminDeleteBTN)
@@ -42,65 +47,52 @@ class AdminMainActivity : AppCompatActivity() {
         adminGetAllBTN = findViewById(R.id.adminGetAllBTN)
         adminGetOneBTN = findViewById(R.id.adminGetOneBTN)
 
-        amountOfUsersTV?.text = getAmountOfUsers()
+        usersBtn = findViewById(R.id.usersBTN)
+        vaccsBtn = findViewById(R.id.vaccinationsBTN)
+        vaccRecsBtn = findViewById(R.id.vaccinationRecordsBTN)
 
+        invisibleButtons()
 
-        tableToggleGroup.addOnButtonCheckedListener { group, checkedId, isChecked ->
-            if (isChecked) {
-                when (checkedId) {
-                    R.id.usersBTN -> {
-                        adminInsertBTN?.visibility = View.INVISIBLE
-                        adminDeleteBTN?.visibility = View.INVISIBLE
-                        adminUpdateBTN?.visibility = View.INVISIBLE
-                        adminGetAllBTN?.visibility = View.INVISIBLE
-                        adminGetOneBTN?.visibility = View.INVISIBLE
-                        amountOfUsersTV?.visibility = View.INVISIBLE
-                    }
+        couritineScoupe.launch {
+            amountOfUsersTV?.text = getAmountOfUsers()
+        }
 
-                    R.id.vaccinationsBTN -> {
-                        Toast.makeText(this, "vaccinations", Toast.LENGTH_SHORT).show()
-                        adminInsertBTN?.setOnClickListener {
-                            val showPopUp= InsertVaccinationPopUp()
-                            showPopUp.show(supportFragmentManager, "InsertVaccinationPopUp")
-                        }
+        usersBtn?.setOnClickListener {
+            invisibleButtons()
+            adminDeleteBTN?.visibility = View.VISIBLE
+            adminDeleteBTN?.setOnClickListener {
+                val showPopUp= DeleteUserPopUp()
+                showPopUp.show(supportFragmentManager, "DeleteUserPopUp")
+            }
+        }
 
-                        adminDeleteBTN?.setOnClickListener {
-                            val showPopUp= DeleteVaccinationPopUp()
-                            showPopUp.show(supportFragmentManager, "DeleteVaccinationPopUp")
-                        }
-
-                        adminUpdateBTN?.setOnClickListener {
-                            val showPopUp= UpdateVaccinationPopUp()
-                            showPopUp.show(supportFragmentManager, "UpdateVaccinationPopUp")
-                        }
-
-                        adminGetAllBTN?.setOnClickListener {
-                            Toast.makeText(this, "get all vaccinations- coming soon", Toast.LENGTH_SHORT).show()
-                        }
-
-                        adminGetOneBTN?.setOnClickListener {
-                            Toast.makeText(this, "get one vaccination- coming soon", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-
-                    R.id.vaccinationRecordsBTN -> {
-                        Toast.makeText(this, "vaccinationRecords", Toast.LENGTH_SHORT).show()
-                        adminInsertBTN?.visibility = View.INVISIBLE
-                        adminDeleteBTN?.visibility = View.INVISIBLE
-                        adminUpdateBTN?.visibility = View.INVISIBLE
-                        adminGetAllBTN?.visibility = View.INVISIBLE
-                        adminGetOneBTN?.visibility = View.INVISIBLE
-                    }
-                }
-            } else {
-                Toast.makeText(
-                    this,
-                    "Choose on which table you want to operate",
-                    Toast.LENGTH_SHORT
-                ).show()
+        vaccsBtn?.setOnClickListener {
+            visibleButtons()
+            adminInsertBTN?.setOnClickListener {
+                val showPopUp= InsertVaccinationPopUp()
+                showPopUp.show(supportFragmentManager, "InsertVaccinationPopUp")
+            }
+            adminDeleteBTN?.setOnClickListener {
+                val showPopUp= DeleteVaccinationPopUp()
+                showPopUp.show(supportFragmentManager, "DeleteVaccinationPopUp")
+            }
+            adminUpdateBTN?.setOnClickListener {
+                val showPopUp= UpdateVaccinationPopUp()
+                showPopUp.show(supportFragmentManager, "UpdateVaccinationPopUp")
             }
 
+            adminGetAllBTN?.setOnClickListener {
+                Toast.makeText(this, "coming soon", Toast.LENGTH_SHORT).show()
+            }
 
+            adminGetOneBTN?.setOnClickListener {
+                Toast.makeText(this, "coming soon", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        vaccRecsBtn?.setOnClickListener {
+            invisibleButtons()
+            Toast.makeText(this, "coming soon", Toast.LENGTH_SHORT).show()
         }
 
 
@@ -111,7 +103,24 @@ class AdminMainActivity : AppCompatActivity() {
         couritineScoupe.launch {
             users= UserSuspendedFunctions.getAllUsers()
         }
-        return users!!.size.toString()
+        val size = users?.size ?: 0
+        return size.toString()
+    }
+
+    private fun invisibleButtons(){
+        adminInsertBTN?.visibility = View.INVISIBLE
+        adminDeleteBTN?.visibility = View.INVISIBLE
+        adminUpdateBTN?.visibility = View.INVISIBLE
+        adminGetAllBTN?.visibility = View.INVISIBLE
+        adminGetOneBTN?.visibility = View.INVISIBLE
+    }
+
+    private fun visibleButtons(){
+        adminInsertBTN?.visibility = View.VISIBLE
+        adminDeleteBTN?.visibility = View.VISIBLE
+        adminUpdateBTN?.visibility = View.VISIBLE
+        adminGetAllBTN?.visibility = View.VISIBLE
+        adminGetOneBTN?.visibility = View.VISIBLE
     }
 
 }

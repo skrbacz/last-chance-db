@@ -30,6 +30,11 @@ class DeleteUserPopUp : DialogFragment() {
 
         couritineScoupe.launch {
             users = UserSuspendedFunctions.getAllUsers()
+
+            binding.let {
+
+
+            }
         }
 
         val usersEmails = getEmailsArray(users)

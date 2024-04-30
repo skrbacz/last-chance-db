@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayout5"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="450dp"
     tools:context=".admin_popups.vaccination.UpdateVaccinationPopUp">
 
@@ -50,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:inputType="none"
-                android:hint="PFIZER"
+                android:hint="VACCINATION NAME"
                 android:textAlignment="center" />
 
 

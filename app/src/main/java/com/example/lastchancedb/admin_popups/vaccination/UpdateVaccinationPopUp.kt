@@ -32,6 +32,13 @@ class UpdateVaccinationPopUp : DialogFragment() {
 
         couritineScoupe.launch {
             vaccinations = VaccinationSuspendedFunctions.getAllVaccs()
+
+            binding.let {
+                val vaccNames = getVaccNames(vaccinations)
+                val arrayAdapter =
+                    ArrayAdapter(requireContext(), R.layout.drop_down_item, vaccNames)
+                binding.adminVaccinationUpdateACTV.setAdapter(arrayAdapter)
+            }
         }
 
         val vaccName = getVaccNames(vaccinations)

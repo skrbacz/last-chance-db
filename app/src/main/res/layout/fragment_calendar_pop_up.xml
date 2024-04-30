@@ -1,0 +1,16 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_centerInParent="true"
+        android:clickable="true"
+        android:dateTextAppearance="@style/TextAppearance.AppCompat.Large"
+        android:focusable="true"
+        android:minDate="@{System.currentTimeMillis()}" />
+
+</RelativeLayout>

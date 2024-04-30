@@ -1,6 +1,7 @@
 package com.example.lastchancedb.database.vaccination
 
 import android.content.Context
+import android.util.Log
 import android.widget.Toast
 import com.example.lastchancedb.database.DatabaseConnection
 import kotlinx.coroutines.Dispatchers
@@ -81,6 +82,7 @@ object VaccinationSuspendedFunctions {
             val connection = DatabaseConnection.getConnection()
             val vaccQueries = VaccQueries(connection)
             val result = vaccQueries.getAllVaccs()
+            Log.d("VaccinationSuspendFunctions","getAllVaccs: ${result?.first()?.name}")
             connection.close()
             result
         }
