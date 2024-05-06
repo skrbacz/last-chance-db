@@ -76,11 +76,31 @@ object VaccinationRecordSuspendedFunctions {
         }
     }
 
+    suspend fun getVaccRecByUserEmailVaccName(email: String, vaccName: String): VaccinationRecord? {
+        return withContext(Dispatchers.IO) {
+            val connection = DatabaseConnection.getConnection()
+            val vaccRecQueries = VaccRecQueries(connection)
+            val result = vaccRecQueries.getVaccRecByUserEmailVaccName(email, vaccName)
+            connection.close()
+            result
+        }
+    }
+
     suspend fun getAllVaccRec(): Set<VaccinationRecord?>? {
         return withContext(Dispatchers.IO) {
             val connection = DatabaseConnection.getConnection()
             val vaccRecQueries = VaccRecQueries(connection)
             val result = vaccRecQueries.getAllVaccRec()
+            connection.close()
+            result
+        }
+    }
+
+    suspend fun getAllVaccRecByUserEmail(email: String): Set<VaccinationRecord?>? {
+        return withContext(Dispatchers.IO) {
+            val connection = DatabaseConnection.getConnection()
+            val vaccRecQueries = VaccRecQueries(connection)
+            val result = vaccRecQueries.getAllVaccRecByUserEmail(email)
             connection.close()
             result
         }

@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">lastChanceDB</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="app_name">Immunify</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="whatever">whatever</string>
 </resources>

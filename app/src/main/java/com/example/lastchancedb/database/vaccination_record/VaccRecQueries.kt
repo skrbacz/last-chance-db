@@ -1,7 +1,5 @@
 package com.example.lastchancedb.database.vaccination_record
 
-import com.example.lastchancedb.database.vaccination_record.VaccRecDAO
-import com.example.lastchancedb.database.vaccination_record.VaccinationRecord
 import java.sql.Connection
 import java.sql.ResultSet
 import java.util.Locale
@@ -21,10 +19,40 @@ class VaccRecQueries(private val connection: Connection): VaccRecDAO {
         }
     }
 
+    override fun getVaccRecByUserEmailVaccName(
+        email: String,
+        vaccName: String
+    ): VaccinationRecord? {
+        val query= "{CALL getVaccRecByUserEmailVaccName(?,?)}"
+        val callableStatement= connection.prepareCall(query)
+        callableStatement.setString(1, email)
+        callableStatement.setString(2, vaccName)
+        val resultSet = callableStatement.executeQuery()
+
+        return if (resultSet.next()) {
+            mapResultSetToVaccRec(resultSet)
+        } else {
+            null
+        }
+    }
+
     override fun getAllVaccRec(): Set<VaccinationRecord?>? {
         val query= "{CALL getAllVaccRec()}"
 
         val callableStatement= connection.prepareCall(query)
+        val resultSet = callableStatement.executeQuery()
+
+        val vaccRecs= mutableSetOf<VaccinationRecord?>()
+        while (resultSet.next()) {
+            vaccRecs.add(mapResultSetToVaccRec(resultSet))
+        }
+        return if (vaccRecs.isEmpty()) null else vaccRecs
+    }
+
+    override fun getAllVaccRecByUserEmail(email: String): Set<VaccinationRecord?>? {
+        val query= "{CALL getAllVaccRecByUserEmail(?)}"
+        val callableStatement= connection.prepareCall(query)
+        callableStatement.setString(1, email)
         val resultSet = callableStatement.executeQuery()
 
         val vaccRecs= mutableSetOf<VaccinationRecord?>()
@@ -72,9 +100,9 @@ class VaccRecQueries(private val connection: Connection): VaccRecDAO {
         return callableStatement.executeUpdate() > 0
     }
 
-    private fun mapResultSetToVaccRec(resultSet: ResultSet): VaccinationRecord? {
+    private fun mapResultSetToVaccRec(resultSet: ResultSet): VaccinationRecord {
         return VaccinationRecord(
-            id= resultSet.getInt("vaccRecId"),
+//            id= resultSet.getInt("vaccRecId"),
             userEmail= resultSet.getString("userEmail"),
             vaccName= resultSet.getString("vaccName"),
             dateAdministrated= resultSet.getDate("dateAdministrated"),

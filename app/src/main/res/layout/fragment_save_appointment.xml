@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="400dp"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:backgroundTint="#FFFFFF">
 
     <TextView
         android:id="@+id/tvName"
@@ -45,7 +46,7 @@
             app:startIconDrawable="@drawable/ic_syringe_filled">
 
             <AutoCompleteTextView
-                android:id="@+id/vaccinationNameForRecordACTV"
+                android:id="@+id/vaccNameForAppointmentACTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -54,7 +55,7 @@
                 android:textAlignment="center" />
 
             <TextView
-                android:id="@+id/dateText"
+                android:id="@+id/dateTV"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_gravity="center"
@@ -75,7 +76,7 @@
 
 
             <Button
-                android:id="@+id/addVaccRecBTN"
+                android:id="@+id/scheduleAppointmentBTN"
                 android:layout_width="150dp"
                 android:layout_height="48dp"
                 android:layout_gravity="center"
@@ -88,6 +89,4 @@
 
 
     </LinearLayout>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

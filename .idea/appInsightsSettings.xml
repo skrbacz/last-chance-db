@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.example.lastchancedb" />
+                  <option name="mobileSdkAppId" value="1:1031950585637:android:0457557385888f4ddcd4cc" />
+                  <option name="projectId" value="working-immunify" />
+                  <option name="projectNumber" value="1031950585637" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

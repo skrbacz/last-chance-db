@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1031950585637",
+    "project_id": "working-immunify",
+    "storage_bucket": "working-immunify.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1031950585637:android:0457557385888f4ddcd4cc",
+        "android_client_info": {
+          "package_name": "com.example.lastchancedb"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDs3cR8Ae28DsBtRd2Yfvh9ZxB_bBN_hf8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

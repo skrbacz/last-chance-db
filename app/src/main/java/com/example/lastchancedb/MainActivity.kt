@@ -9,7 +9,6 @@ import android.view.animation.AnimationUtils
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.example.lastchancedb.popups.AddVaccinationRecordFragment
-import com.example.lastchancedb.popups.CalendarFragmentPopUp
 import com.example.lastchancedb.popups.QuestionScheduleAppointmentFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 

@@ -8,7 +8,6 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
 import com.example.lastchancedb.R
 import com.google.android.material.button.MaterialButtonToggleGroup
 
@@ -32,7 +31,7 @@ class QuestionScheduleAppointmentFragment : DialogFragment() {
             if (getSelectedDoseType() == "default") {
                 Toast.makeText(requireContext(), "Please choose a dose type", Toast.LENGTH_SHORT).show()
             } else {
-                val showPopUp = selectedDoseType?.let { it1 -> ScheduleAppointmentFragment(it1) }
+                val showPopUp = selectedDoseType?.let { it1 -> SaveAppointmentFragment(it1) }
                 showPopUp?.show((activity as AppCompatActivity).supportFragmentManager,"showScheduleAppointmentFragment")            }
         }
 
