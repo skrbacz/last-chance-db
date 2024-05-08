@@ -1,4 +1,4 @@
-package com.example.lastchancedb
+package com.example.lastchancedb.register_login
 
 import android.app.Application
 import com.google.firebase.FirebaseApp

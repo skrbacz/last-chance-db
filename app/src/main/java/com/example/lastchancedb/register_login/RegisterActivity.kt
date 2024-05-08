@@ -1,6 +1,7 @@
 package com.example.lastchancedb.register_login
 
 import android.app.DatePickerDialog
+import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -18,6 +19,7 @@ import com.example.lastchancedb.database.user.UserSuspendedFunctions
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -25,7 +27,7 @@ import java.util.Locale
 
 class RegisterActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
 
-    private lateinit var auth: FirebaseAuth
+//    private lateinit var auth: FirebaseAuth
 
     private var nameEDTV: EditText? = null
     private var emailEDTV: EditText? = null
@@ -35,6 +37,8 @@ class RegisterActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
     private var registerBTN: Button? = null
     private var loginTV: TextView? = null
 
+    private var passwordId: Int?= null
+    private var passId: Int?= null
     private var selectedDate: java.sql.Date?= null
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,12 +64,12 @@ class RegisterActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
         registerBTN?.setOnClickListener {
             if (validRegisterInformation()) {
 //                register()
-                var passId: Int= 0
                coroutineScope.launch {
                    passId= insertPassword()
-                   insertUser(passId)
+                   insertUser()
                }
 
+                goToLogin()
                 Toast.makeText(this, "valid register: true", Toast.LENGTH_SHORT).show()
 
             }
@@ -195,23 +199,23 @@ class RegisterActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
 
 
     //first we insert password to get the password id
-    private suspend fun insertPassword(): Int{
+    private suspend fun insertPassword(): Int {
+        val password: String = passwordEDTV?.text.toString().trim()
 
-        val password: String = passwordEDTV?.text.toString().trim() { it <= ' ' }
-        val pass= Password(null, password)
-
-        var passwordId: Int = 0
-        coroutineScope.launch {
-            passwordId= PasswordSuspendedFunctions.insertPassword(pass, this@RegisterActivity)
-        }
-        Log.d("PasswordId", "$passwordId")
-        return passwordId
+        return coroutineScope.async {
+            val pass = Password(null, password)
+            val passwordId = PasswordSuspendedFunctions.insertPassword(pass, this@RegisterActivity)
+            Log.d("PasswordId in register activity", "$passwordId")
+            passwordId
+        }.await()
     }
+
     //then we insert user
-    private suspend fun insertUser(passwordId: Int){
+    private suspend fun insertUser(){
         val name: String = nameEDTV?.text.toString().trim() { it <= ' ' }
         val email: String = emailEDTV?.text.toString().trim() { it <= ' ' }
-        val user= User(name,email,selectedDate, passwordId)
+        Log.d("SelectedDate", "$selectedDate")
+        val user= User(name,email,selectedDate,passId)
 
         coroutineScope.launch {
             UserSuspendedFunctions.insertUser(user, this@RegisterActivity)

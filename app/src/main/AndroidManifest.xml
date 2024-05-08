@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name=".MyApp"
+        android:name=".register_login.MyApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -17,13 +17,7 @@
         android:theme="@style/Theme.LastChanceDB"
         tools:targetApi="31">
         <activity
-            android:name=".recycle_view_activities.VaccinationUsersHistoryActivity"
-            android:exported="false" />
-        <activity
-            android:name=".recycle_view_activities.VaccinationLibraryActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
+            android:name=".register_login.RegisterActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,7 +26,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".register_login.RegisterActivity"
+            android:name=".recycler_view_activities.UserVaccRecStorageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".recycler_view_activities.VaccinationLibraryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
             android:exported="true" />
         <activity
             android:name=".AdminMainActivity"

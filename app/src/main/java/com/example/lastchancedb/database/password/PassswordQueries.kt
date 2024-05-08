@@ -1,5 +1,6 @@
 package com.example.lastchancedb.database.password
 
+import android.util.Log
 import at.favre.lib.crypto.bcrypt.BCrypt
 import java.sql.Connection
 import java.sql.ResultSet
@@ -43,16 +44,23 @@ class PassswordQueries(private val connection: Connection) : PasswordDAO {
         var passwordId = -1
 
         if (result > 0) {
-            val generatedKeys = callableStatement.generatedKeys
-            if (generatedKeys.next()) {
-                passwordId = generatedKeys.getInt(1)
+            // After inserting the password, fetch the last inserted passwordId
+            val selectLastIdQuery = "SELECT LAST_INSERT_ID() AS last_id"
+            val selectStatement = connection.createStatement()
+            val resultSet = selectStatement.executeQuery(selectLastIdQuery)
+
+            if (resultSet.next()) {
+                passwordId = resultSet.getInt("last_id")
+                Log.d("Pass id in password queries", "$passwordId")
             }
+            selectStatement.close()
         }
 
         callableStatement.close()
 
         return passwordId
     }
+
 
     override fun deletePassword(passwordId: Int): Boolean {
         val query= "{CALL deleteUser(?)}"

@@ -37,8 +37,8 @@ class UserQueries(private val connection: Connection) : UserDAO {
 
         callableStatement.setString(1, user.name)
         callableStatement.setString(2, user.email)
-        user.passwordId?.let { callableStatement.setInt(3, it) }
-        callableStatement.setDate(4, user.dob)
+        callableStatement.setDate(3, user.dob)
+        user.passwordId?.let { callableStatement.setInt(4, it) }
 
 
         val result = !callableStatement.execute()

@@ -1,7 +1,9 @@
 package com.example.lastchancedb.register_login
 
+import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -9,11 +11,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.lastchancedb.MainActivity
 import com.example.lastchancedb.R
+import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
 
 //    var mAuth= FirebaseAuth.getInstance()
-//    var app= FirebaseApp.initializeApp(this)
 
     private var emailEDTV: EditText?= null
     private var passwordEDTV: EditText?= null

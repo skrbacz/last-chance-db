@@ -37,6 +37,7 @@ class VaccQueries(private val connection: Connection): VaccDAO {
         val lowercaseName = vacc.name?.lowercase(Locale.ROOT)
 
         callableStatement.setString(1, lowercaseName)
+//        callableStatement.setString(2,vacc.producer)
         vacc.daysUntilNextDose?.let { callableStatement.setInt(2, it) }
         callableStatement.setString(3, vacc.description)
 
@@ -58,6 +59,7 @@ class VaccQueries(private val connection: Connection): VaccDAO {
         val query = "{CALL updateVacc(?,?,?)}"
         val callableStatement = connection.prepareCall(query)
         callableStatement.setString(1, vacc.name)
+//        callableStatement.setString(2,vacc.producer)
         vacc.daysUntilNextDose?.let { callableStatement.setInt(2, it) }
         callableStatement.setString(3,vacc.description)
         return callableStatement.executeUpdate() > 0
@@ -66,6 +68,7 @@ class VaccQueries(private val connection: Connection): VaccDAO {
     private fun mapResultSetToVacc(resultSet: ResultSet): Vaccination? {
         return Vaccination(
             name= resultSet.getString("name"),
+//            producer= resultSet.getString("producer"),
             daysUntilNextDose = resultSet.getInt("daysUntilNextDose"),
             description = resultSet.getString("description")
         )

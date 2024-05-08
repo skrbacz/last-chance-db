@@ -1,6 +1,7 @@
 package com.example.lastchancedb.database.password
 
 import android.content.Context
+import android.util.Log
 import android.widget.Toast
 import com.example.lastchancedb.database.DatabaseConnection
 import kotlinx.coroutines.Dispatchers
@@ -23,6 +24,7 @@ object PasswordSuspendedFunctions {
                 }
             }
 
+            Log.d("PSF Password Id value", "$passwordId")
             passwordId
         }
     }

@@ -106,7 +106,7 @@ class VaccRecQueries(private val connection: Connection): VaccRecDAO {
             userEmail= resultSet.getString("userEmail"),
             vaccName= resultSet.getString("vaccName"),
             dateAdministrated= resultSet.getDate("dateAdministrated"),
-            nextDoseDate= resultSet.getDate("nextDoseDate")
+            nextDoseDate= resultSet.getDate("nextDoseDueDate")
         )
     }
 }

@@ -16,7 +16,7 @@ import com.example.lastchancedb.database.vaccination.Vaccination
 import com.example.lastchancedb.database.vaccination.VaccinationSuspendedFunctions
 import com.example.lastchancedb.database.vaccination_record.VaccinationRecord
 import com.example.lastchancedb.database.vaccination_record.VaccinationRecordSuspendedFunctions
-import com.example.lastchancedb.databinding.FragmentScheduleAppointmentBinding
+import com.example.lastchancedb.databinding.FragmentSaveAppointmentBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -28,7 +28,7 @@ import java.util.Locale
 class SaveAppointmentFragment(private var dose: String) : DialogFragment(),
     DatePickerDialog.OnDateSetListener {
 
-    private var _binding: FragmentScheduleAppointmentBinding? = null
+    private var _binding: FragmentSaveAppointmentBinding? = null
     private val binding get() = _binding!!
 
     private var scheduleBTN: Button? = null
@@ -70,7 +70,7 @@ class SaveAppointmentFragment(private var dose: String) : DialogFragment(),
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentScheduleAppointmentBinding.inflate(inflater, container, false)
+        _binding = FragmentSaveAppointmentBinding.inflate(inflater, container, false)
 
         scheduleBTN = binding.scheduleAppointmentBTN
 
