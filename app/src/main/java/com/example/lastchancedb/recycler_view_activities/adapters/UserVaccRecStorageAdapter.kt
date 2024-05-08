@@ -23,15 +23,24 @@ class UserVaccRecStorageAdapter(
         val vaccModel = vaccRecModelAL[position]
         holder.vaccName?.text = vaccModel.vaccName
         holder.vaccDateAdministrated?.text = vaccModel.dateAdministrated.toString()
-        holder.vaccNextDoseDueDate?.text = vaccModel.nextDoseDueDate.toString()
-        holder.vaccRecIMG?.setImageResource(R.drawable.ic_fab_add_record)
 
+        // Check if nextDoseDueDate is equal to epoch time
+        val nextDoseDueDate = vaccModel.nextDoseDueDate
+        val doseDueText = if (nextDoseDueDate != null && nextDoseDueDate.time == 0L) {
+            "not yet taken"
+        } else {
+            nextDoseDueDate?.toString() ?: ""
+        }
+
+        holder.vaccNextDoseDueDate?.text = doseDueText
+        holder.vaccRecIMG?.setImageResource(R.drawable.ic_fab_add_record)
     }
+
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var vaccName: TextView? = itemView.findViewById(R.id.vaccNameTVI)
-        var vaccDateAdministrated: TextView? = itemView.findViewById(R.id.vaccDateAdministratedTVI)
-        var vaccNextDoseDueDate: TextView? = itemView.findViewById(R.id.vaccNextDoseDueDateTVI)
+        var vaccDateAdministrated: TextView? = itemView.findViewById(R.id.firstDoseDateTVH)
+        var vaccNextDoseDueDate: TextView? = itemView.findViewById(R.id.nextDoseTVH)
         var vaccRecIMG: ImageView? = itemView.findViewById(R.id.vaccRecIMG)
     }
 

@@ -12,12 +12,17 @@ import android.widget.LinearLayout
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.example.lastchancedb.database.vaccination_record.VaccinationRecord
 import com.example.lastchancedb.popups.AddVaccinationRecordFragment
 import com.example.lastchancedb.popups.QuestionScheduleAppointmentFragment
 import com.example.lastchancedb.recycler_view_activities.UserVaccRecStorageActivity
 import com.example.lastchancedb.recycler_view_activities.VaccinationLibraryActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.mikhaellopez.circularprogressbar.CircularProgressBar
+import java.util.Calendar
+import kotlin.math.abs
 
+//TODO: get the closest by date record to make circular progress bar work and display its name and date
 class MainActivity : AppCompatActivity() {
 
     private val rotateOpen: Animation by lazy {
@@ -50,7 +55,7 @@ class MainActivity : AppCompatActivity() {
     private var scheduleVaccinationBtn: FloatingActionButton? = null
     private var goToAdmin: Button? = null
     private var vaccLib: Button? = null
-    private var progressBar: ProgressBar?= null
+    private var progressBar: CircularProgressBar?= null
 
     private var clicked = false
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -79,14 +84,6 @@ class MainActivity : AppCompatActivity() {
         addButton = findViewById(R.id.addBtn)
         addVaccinationBtn = findViewById(R.id.addVaccinationBtn)
         scheduleVaccinationBtn = findViewById(R.id.scheduleVaccinationBtn)
-        goToAdmin = findViewById(R.id.goToMainAdmin)
-        vaccLib = findViewById(R.id.vaccLibBTN)
-
-        goToAdmin?.setOnClickListener {
-            val intent = Intent(this@MainActivity, AdminMainActivity::class.java)
-            startActivity(intent)
-        }
-
 
         addButton?.setOnClickListener {
             onAddButtonClicked()
@@ -108,10 +105,9 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        progressBar= findViewById(R.id.progressBarM)
+        progressBar= findViewById(R.id.progressBar)
 
-        progressBar?.max= 0
-        progressBar?.progress = daysUntilNextDose()
+
 
     }
 
@@ -149,4 +145,24 @@ class MainActivity : AppCompatActivity() {
             addVaccinationBtn?.startAnimation(toBottom)
         }
     }
+
+    fun findClosestVaccinationRecord(vaccinationRecords: Set<VaccinationRecord?>?): VaccinationRecord? {
+        val currentDate = Calendar.getInstance()
+        var closestRecord: VaccinationRecord? = null
+        var minDifference = Long.MAX_VALUE
+
+        if (vaccinationRecords != null) {
+            for (record in vaccinationRecords) {
+                val difference = abs((record?.nextDoseDate?.time ?: -1 ) - currentDate.timeInMillis)
+                if (difference < minDifference) {
+                    minDifference = difference
+                    closestRecord = record
+                }
+            }
+        }
+
+        return closestRecord
+    }
+
 }
+

@@ -6,17 +6,22 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="409dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="149dp"
-        android:layout_marginEnd="1dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/main_cyan"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="10dp"
+        app:cardPreventCornerOverlap="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -24,26 +29,66 @@
                 android:id="@+id/vaccNameTVI"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="120dp"
+                android:layout_marginTop="43dp"
+                android:text="Vaccination Name"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/vaccDateAdministratedTVI"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:layout_width="80dp"
+                android:layout_height="22dp"
+                android:layout_marginTop="70dp"
+                android:layout_marginLeft="120dp"
+                android:text="First dose:"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/vaccNextDoseDueDateTVI"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:layout_marginLeft="120dp"
+                android:layout_marginTop="90dp"
+                android:text="Next dose: "
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/vaccRecIMG"
+                android:layout_width="98dp"
+                android:layout_height="89dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="42dp"
+                android:layout_marginBottom="42dp"
+                android:src="@drawable/ic_fab_add_record"
+                app:tint="@color/main_yellow" />
+
+            <TextView
+                android:id="@+id/firstDoseDateTVH"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_fab_add_record" />
+                android:layout_marginTop="70dp"
+                android:layout_marginLeft="210dp"
+                android:text="2024-05-14"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/nextDoseTVH"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="210dp"
+                android:layout_marginTop="90dp"
+                android:text="TextView"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,6 +6,6 @@ data class VaccinationRecord(
     val id: Int?= null,
     val userEmail: String?= null,
     val vaccName: String?= null,
-    val dateAdministrated: Date,
+    val dateAdministrated: Date?= null,
     var nextDoseDate: Date?= null
 )

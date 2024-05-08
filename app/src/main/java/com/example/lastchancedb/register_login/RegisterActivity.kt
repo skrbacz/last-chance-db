@@ -27,19 +27,19 @@ import java.util.Locale
 
 class RegisterActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
 
-//    private lateinit var auth: FirebaseAuth
+    var auth = FirebaseAuth.getInstance()
 
     private var nameEDTV: EditText? = null
     private var emailEDTV: EditText? = null
-    private var dobTV: TextView?= null
+    private var dobTV: TextView? = null
     private var passwordEDTV: EditText? = null
     private var repeatPasswordEDTV: EditText? = null
     private var registerBTN: Button? = null
     private var loginTV: TextView? = null
 
-    private var passwordId: Int?= null
-    private var passId: Int?= null
-    private var selectedDate: java.sql.Date?= null
+    private var passwordId: Int? = null
+    private var passId: Int? = null
+    private var selectedDate: java.sql.Date? = null
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,11 +63,11 @@ class RegisterActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
 
         registerBTN?.setOnClickListener {
             if (validRegisterInformation()) {
-//                register()
-               coroutineScope.launch {
-                   passId= insertPassword()
-                   insertUser()
-               }
+                register()
+                coroutineScope.launch {
+                    passId = insertPassword()
+                    insertUser()
+                }
 
                 goToLogin()
                 Toast.makeText(this, "valid register: true", Toast.LENGTH_SHORT).show()
@@ -78,8 +78,8 @@ class RegisterActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
         }
     }
 
-    private fun validRegisterInformation(): Boolean{
-        if(nameEDTV?.text.toString().isBlank()){
+    private fun validRegisterInformation(): Boolean {
+        if (nameEDTV?.text.toString().isBlank()) {
             nameEDTV?.error = "Please enter your name"
             return false
         } else if ((nameEDTV?.text?.length ?: 0) >= 100) {
@@ -87,29 +87,30 @@ class RegisterActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
             return false
         }
 
-        if(emailEDTV?.text.toString().isBlank()){
+        if (emailEDTV?.text.toString().isBlank()) {
             emailEDTV?.error = "Please enter your email"
             return false
         }
 
         //checks if the email is valid or not
-        val validEmail = android.util.Patterns.EMAIL_ADDRESS.matcher(emailEDTV?.text.toString()).matches()
-        if(!validEmail){
+        val validEmail =
+            android.util.Patterns.EMAIL_ADDRESS.matcher(emailEDTV?.text.toString()).matches()
+        if (!validEmail) {
             emailEDTV?.error = "Please provide a valid email"
             return false
         }
 
-        if(selectedDate==null){
+        if (selectedDate == null) {
             Toast.makeText(this, "Please choose your date of birth", Toast.LENGTH_SHORT).show()
             return false
         }
 
-        if(passwordEDTV?.text.toString().isBlank()){
+        if (passwordEDTV?.text.toString().isBlank()) {
             passwordEDTV?.error = "Password is required"
             return false
         }
 
-        if((passwordEDTV?.text?.length ?: 0) < 8){
+        if ((passwordEDTV?.text?.length ?: 0) < 8) {
             passwordEDTV?.error = "Password must be at least 8 characters"
             return false
         }
@@ -119,27 +120,27 @@ class RegisterActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
         val digitRegex = Regex("[0-9]")
         val specialCharacterRegex = Regex("[^A-Za-z0-9]")
 
-        if(!uppercaseRegex.containsMatchIn(passwordEDTV?.text.toString())){
+        if (!uppercaseRegex.containsMatchIn(passwordEDTV?.text.toString())) {
             passwordEDTV?.error = "Password must contain at least one uppercase letter"
             return false
         }
 
-        if(!lowercaseRegex.containsMatchIn(passwordEDTV?.text.toString())){
+        if (!lowercaseRegex.containsMatchIn(passwordEDTV?.text.toString())) {
             passwordEDTV?.error = "Password must contain at least one lowercase letter"
             return false
         }
 
-        if(!digitRegex.containsMatchIn(passwordEDTV?.text.toString())){
+        if (!digitRegex.containsMatchIn(passwordEDTV?.text.toString())) {
             passwordEDTV?.error = "Password must contain at least one digit"
             return false
         }
 
-        if(!specialCharacterRegex.containsMatchIn(passwordEDTV?.text.toString())){
+        if (!specialCharacterRegex.containsMatchIn(passwordEDTV?.text.toString())) {
             passwordEDTV?.error = "Password must contain at least one special character"
             return false
         }
 
-        if(!passwordEDTV?.text.toString().equals(repeatPasswordEDTV?.text.toString())){
+        if (!passwordEDTV?.text.toString().equals(repeatPasswordEDTV?.text.toString())) {
             repeatPasswordEDTV?.error = "Passwords do not match"
             return false
         }
@@ -147,27 +148,28 @@ class RegisterActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
         return true
     }
 
-//    private fun register(){
-//        val email: String = emailEDTV?.text.toString().trim() { it <= ' ' }
-//        val password: String = passwordEDTV?.text.toString().trim() { it <= ' ' }
-//
-//        auth.createUserWithEmailAndPassword(email, password)
-//            .addOnCompleteListener { task ->
-//                if (task.isSuccessful) {
-//                    Log.d(ContentValues.TAG, "create user with email: success")
-//                } else {
-//                    Log.w(ContentValues.TAG, "create user with email: failure", task.exception)
-//                    Toast.makeText(baseContext, "Authentication failed", Toast.LENGTH_SHORT)
-//                        .show()
-//                }
-//            }
-//    }
+    private fun register() {
+        val email: String = emailEDTV?.text.toString().trim() { it <= ' ' }
+        val password: String = passwordEDTV?.text.toString().trim() { it <= ' ' }
 
-    private fun registrationSuccessful(){
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Log.d(ContentValues.TAG, "create user with email: success")
+                    registrationSuccessful()
+                } else {
+                    Log.w(ContentValues.TAG, "create user with email: failure", task.exception)
+                    Toast.makeText(baseContext, "Authentication failed", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+    }
+
+    private fun registrationSuccessful() {
         Toast.makeText(this@RegisterActivity, "Registration Successful", Toast.LENGTH_SHORT).show()
     }
 
-    private fun goToLogin(){
+    private fun goToLogin() {
         val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
         startActivity(intent)
         finish()
@@ -180,6 +182,7 @@ class RegisterActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
         val day = currentDate.get(Calendar.DAY_OF_MONTH)
 
         val dialog = DatePickerDialog(this, this, year, month, day)
+        dialog.datePicker.maxDate = currentDate.timeInMillis
         dialog.show()
     }
 
@@ -211,11 +214,11 @@ class RegisterActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
     }
 
     //then we insert user
-    private suspend fun insertUser(){
+    private suspend fun insertUser() {
         val name: String = nameEDTV?.text.toString().trim() { it <= ' ' }
         val email: String = emailEDTV?.text.toString().trim() { it <= ' ' }
         Log.d("SelectedDate", "$selectedDate")
-        val user= User(name,email,selectedDate,passId)
+        val user = User(name, email, selectedDate, passId)
 
         coroutineScope.launch {
             UserSuspendedFunctions.insertUser(user, this@RegisterActivity)

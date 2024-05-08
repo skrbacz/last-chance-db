@@ -13,7 +13,7 @@
         android:layout_width="409dp"
         android:layout_height="match_parent"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="1dp"
         android:layout_marginBottom="44dp">
 
@@ -67,5 +67,15 @@
             android:src="@drawable/ic_syringe_filled"
             app:tint="#F38AB3" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="My vaccination record storage"
+        android:textSize="20sp"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"/>
 
 </RelativeLayout>

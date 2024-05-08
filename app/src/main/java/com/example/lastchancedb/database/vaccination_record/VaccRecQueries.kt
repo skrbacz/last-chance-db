@@ -18,7 +18,6 @@ class VaccRecQueries(private val connection: Connection): VaccRecDAO {
             null
         }
     }
-
     override fun getVaccRecByUserEmailVaccName(
         email: String,
         vaccName: String

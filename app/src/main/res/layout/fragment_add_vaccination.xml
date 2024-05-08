@@ -3,91 +3,72 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="400dp"
-    android:background="@color/white">
+    android:layout_height="wrap_content"
+    android:background="@drawable/popup_shape"
+    android:backgroundTint="#00FFFFFF">
 
-    <TextView
-        android:id="@+id/tvName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="46dp"
-        android:layout_marginEnd="27dp"
-        android:layout_marginBottom="22dp"
-        android:text="Add vaccination record"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.51"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.571" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-            android:layout_width="325dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            app:hintEnabled="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:startIconDrawable="@drawable/ic_syringe_filled">
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            <AutoCompleteTextView
-                android:id="@+id/vaccinationNameForRecordACTV"
-                android:layout_width="match_parent"
+
+            <TextView
+
+                android:id="@+id/tvAddVaccination"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:hint="VACCINATION NAME"
-                android:inputType="none"
-                android:textAlignment="center" />
+                android:layout_gravity="center"
+                android:text="Add Vaccination"
+                android:textAlignment="center"
+                android:textSize="30sp" />
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="325dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:hintEnabled="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:startIconDrawable="@drawable/ic_syringe_filled">>
+                <AutoCompleteTextView
+                    android:id="@+id/vaccinationNameForRecordACTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:hint="VACCINATION NAME"
+                    android:inputType="none"
+                    android:textAlignment="center" />
+            </com.google.android.material.textfield.TextInputLayout>
+
 
             <TextView
                 android:id="@+id/dateText"
-                android:layout_width="match_parent"
+                android:layout_width="325dp"
                 android:layout_height="45dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/almost_square"
-                android:clickable="true"
-                android:ems="10"
-                android:focusable="true"
-                android:gravity="center"
                 android:text="APPOINTMENT DATE"
                 android:textAlignment="center"
-                android:textColor="#4D4A50"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.947"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
-
+                android:gravity="center"
+                android:layout_marginTop="16dp" />
 
             <Button
                 android:id="@+id/addVaccRecBTN"
                 android:layout_width="150dp"
                 android:layout_height="48dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="50dp"
-                android:backgroundTint="@color/main_pink"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/rounded_edit_text"
                 android:text="Add"
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF" />
-        </com.google.android.material.textfield.TextInputLayout>
 
-
-    </LinearLayout>
-
+        </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

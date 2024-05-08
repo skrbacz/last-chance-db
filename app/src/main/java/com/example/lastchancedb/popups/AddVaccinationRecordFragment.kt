@@ -17,16 +17,22 @@ import com.example.lastchancedb.database.vaccination.VaccinationSuspendedFunctio
 import com.example.lastchancedb.database.vaccination_record.VaccinationRecord
 import com.example.lastchancedb.database.vaccination_record.VaccinationRecordSuspendedFunctions
 import com.example.lastchancedb.databinding.FragmentAddVaccinationBinding
+import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.sql.Date
 import java.util.Calendar
 import java.util.Locale
 
 class AddVaccinationRecordFragment : DialogFragment(), DatePickerDialog.OnDateSetListener {
+
+    private var userEmail= Firebase.auth.currentUser?.email.toString()
 
     private var _binding: FragmentAddVaccinationBinding? = null
     private val binding get() = _binding!!
@@ -37,7 +43,6 @@ class AddVaccinationRecordFragment : DialogFragment(), DatePickerDialog.OnDateSe
     private var dateBtn: TextView?=null
 
     private var selectedDate: Date?= null
-    private var userEmail: String? = null
 
     override fun onResume() {
         super.onResume()
@@ -68,8 +73,6 @@ class AddVaccinationRecordFragment : DialogFragment(), DatePickerDialog.OnDateSe
             openDialog()
         }
 
-//        userEmail = getCurrentUser()
-        userEmail="test@test.com"
 
         addBtn?.setOnClickListener {
             if(binding.vaccinationNameForRecordACTV.text.isEmpty()){
@@ -123,10 +126,4 @@ class AddVaccinationRecordFragment : DialogFragment(), DatePickerDialog.OnDateSe
         }
         return vaccNames.toTypedArray()
     }
-
-//    fun getCurrentUser(): String{
-//        val auth = FirebaseAuth.getInstance()
-//        return auth.currentUser?.email.toString()
-//    }
-
 }

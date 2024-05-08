@@ -19,37 +19,47 @@
             android:layout_width="162dp"
             android:layout_height="25dp"
             android:layout_marginStart="124dp"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="56dp"
             android:layout_marginEnd="125dp"
+            android:gravity="center"
             android:text="Days till next vaccination:"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ProgressBar
-            android:id="@+id/progressBarM"
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="299dp"
-            android:layout_height="250dp"
-            android:layout_marginStart="56dp"
-            android:layout_marginTop="80dp"
-            android:layout_marginEnd="56dp"
-            android:indeterminateDrawable="@drawable/progress_bar"
-            android:progress="50"
+        <com.mikhaellopez.circularprogressbar.CircularProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="293dp"
+            android:layout_height="275dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="68dp"
+            android:layout_marginTop="88dp"
+            android:layout_marginEnd="68dp"
+            android:layout_marginBottom="324dp"
+            app:cpb_background_progressbar_color="@color/grey"
+            app:cpb_background_progressbar_color_direction="left_to_right"
+            app:cpb_background_progressbar_width="1dp"
+            app:cpb_progress_direction="to_left"
+            app:cpb_progressbar_color_end="@color/main_yellow"
+            app:cpb_progressbar_color_start="@color/main_pink"
+            app:cpb_progressbar_width="10dp"
+            app:cpb_round_border="true"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/daysView"
             android:layout_width="108dp"
             android:layout_height="108dp"
             android:layout_marginStart="151dp"
-            android:layout_marginTop="152dp"
+            android:layout_marginTop="168dp"
             android:layout_marginEnd="152dp"
-            android:text="8"
+            android:gravity="center"
+            android:text="--"
             android:textAlignment="center"
             android:textColor="#EA7E50"
             android:textSize="80sp"
@@ -57,22 +67,6 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/vaccLibBTN"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="vacc lib"
-            tools:layout_editor_absoluteX="163dp"
-            tools:layout_editor_absoluteY="392dp" />
-
-        <Button
-            android:id="@+id/goToMainAdmin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Go to main for admin"
-            tools:layout_editor_absoluteX="120dp"
-            tools:layout_editor_absoluteY="459dp" />
 
         <LinearLayout
             android:id="@+id/bottom_navigation"
@@ -160,6 +154,64 @@
                 app:srcCompat="@drawable/ic_fab_add_record" />
 
         </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="321dp"
+            android:layout_height="192dp"
+            android:layout_margin="10dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="48dp"
+            android:layout_marginEnd="80dp"
+            android:layout_marginBottom="122dp"
+            android:background="@drawable/popup_shape"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/progressBar">
+
+
+            <TextView
+                android:id="@+id/vaccinationNameMAINTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="30dp"
+                android:text="Vaccination:"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/appointmentDateMAINTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="60dp"
+                android:text="Appointment date:"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/vaccinationNameTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="140dp"
+                android:layout_marginTop="30dp"
+                android:text="TextView"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/appointmentDateTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="185dp"
+                android:layout_marginTop="60dp"
+                android:text="TextView"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+        </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

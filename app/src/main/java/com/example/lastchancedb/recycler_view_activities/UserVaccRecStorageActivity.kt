@@ -15,17 +15,20 @@ import com.example.lastchancedb.database.vaccination_record.VaccinationRecord
 import com.example.lastchancedb.database.vaccination_record.VaccinationRecordSuspendedFunctions
 import com.example.lastchancedb.recycler_view_activities.adapters.UserVaccRecStorageAdapter
 import com.example.lastchancedb.recycler_view_activities.models.VaccRecModel
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+//TODO: items from nikola
 class UserVaccRecStorageActivity : AppCompatActivity() {
 
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
     private var vaccinationRecords: Set<VaccinationRecord?>? = null
     private var vaccRecModels: ArrayList<VaccRecModel>? = ArrayList()
     private var recyclerView: RecyclerView? = null
-    private var userEmail= "test@test.com"
+    private var userEmail= Firebase.auth.currentUser?.email.toString()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,18 +68,16 @@ class UserVaccRecStorageActivity : AppCompatActivity() {
     }
 
     private fun setUpVaccRecModel(vaccinationRecords: Set<VaccinationRecord?>?) {
-        for (vaccRec in vaccinationRecords!!) {
-            Log.d("vacc rec from db", "${vaccRec?.vaccName}, ${vaccRec?.dateAdministrated}, ${vaccRec?.nextDoseDate}")
+        vaccinationRecords?.forEach { vaccRec ->
+            val vaccName = vaccRec?.vaccName ?: ""
+            val dateAdministrated = vaccRec?.dateAdministrated ?: java.sql.Date(0)
+            val nextDoseDate = vaccRec?.nextDoseDate ?: java.sql.Date(0)
 
-            vaccRec?.vaccName?.let { vaccRec.dateAdministrated.let { it1 ->
-                vaccRec.nextDoseDate?.let { it2 ->
-                    VaccRecModel(it,
-                        it1, it2
-                    )
-                }
-            } }
-                ?.let { vaccRecModels?.add(it) }
+            val vaccRecModel = VaccRecModel(vaccName, dateAdministrated, nextDoseDate)
+            vaccRecModels?.add(vaccRecModel)
         }
         recyclerView?.adapter?.notifyDataSetChanged()
     }
+
+
 }
