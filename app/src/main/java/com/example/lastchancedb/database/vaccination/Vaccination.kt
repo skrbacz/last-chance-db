@@ -4,5 +4,5 @@ data class Vaccination(
     val name:String?=null,
 //    val producer: String?= null,
     val daysUntilNextDose: Int?= null,
-    val description:String?=null
+    val manufacturer:String?=null
 )

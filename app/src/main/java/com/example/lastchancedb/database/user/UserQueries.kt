@@ -70,7 +70,7 @@ class UserQueries(private val connection: Connection) : UserDAO {
         return User(
             name = resultSet.getString("name"),
             email = resultSet.getString("email"),
-            dob = resultSet.getDate("dob")
+            dob = resultSet.getDate("dateOfBirth")
         )
     }
 

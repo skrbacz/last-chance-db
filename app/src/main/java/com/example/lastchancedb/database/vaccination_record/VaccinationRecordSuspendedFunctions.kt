@@ -29,8 +29,8 @@ object VaccinationRecordSuspendedFunctions {
         }
     }
 
-    suspend fun deleteVaccRec(id: Int, context: Context) {
-        withContext(Dispatchers.IO) {
+    suspend fun deleteVaccRec(id: Int, context: Context): Boolean {
+       return withContext(Dispatchers.IO) {
             val connection = DatabaseConnection.getConnection()
             val vaccRecQueries = VaccRecQueries(connection)
             val result = vaccRecQueries.deleteVaccRec(id)
@@ -46,6 +46,7 @@ object VaccinationRecordSuspendedFunctions {
                     ).show()
                 }
             }
+             result
         }
     }
 

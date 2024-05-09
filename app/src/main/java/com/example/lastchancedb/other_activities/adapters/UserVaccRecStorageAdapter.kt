@@ -1,4 +1,4 @@
-package com.example.lastchancedb.recycler_view_activities.adapters
+package com.example.lastchancedb.other_activities.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,12 +8,22 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lastchancedb.R
-import com.example.lastchancedb.recycler_view_activities.models.VaccRecModel
+import com.example.lastchancedb.other_activities.models.VaccRecModel
 
 class UserVaccRecStorageAdapter(
     private val context: Context,
-    private val vaccRecModelAL: ArrayList<VaccRecModel>
+    private val vaccRecModelAL: ArrayList<VaccRecModel>,
+    private val onDeleteClickListener: OnDeleteClickListener,
 ) : RecyclerView.Adapter<UserVaccRecStorageAdapter.ViewHolder>() {
+
+    interface OnDeleteClickListener {
+        fun onDeleteClick(position: Int)
+    }
+
+    interface OnEditClickListener {
+        fun onEditClick(position: Int)
+    }
+
 
     override fun getItemCount(): Int {
         return vaccRecModelAL.size
@@ -34,6 +44,8 @@ class UserVaccRecStorageAdapter(
 
         holder.vaccNextDoseDueDate?.text = doseDueText
         holder.vaccRecIMG?.setImageResource(R.drawable.ic_fab_add_record)
+        holder.deleteIMG?.setImageResource(R.drawable.ic_trash_can)
+
     }
 
 
@@ -42,6 +54,16 @@ class UserVaccRecStorageAdapter(
         var vaccDateAdministrated: TextView? = itemView.findViewById(R.id.firstDoseDateTVH)
         var vaccNextDoseDueDate: TextView? = itemView.findViewById(R.id.nextDoseTVH)
         var vaccRecIMG: ImageView? = itemView.findViewById(R.id.vaccRecIMG)
+        var deleteIMG: ImageView?= itemView.findViewById(R.id.deleteRecord)
+
+        init {
+            deleteIMG?.setOnClickListener {
+                val position= adapterPosition
+                if(position != RecyclerView.NO_POSITION) {
+                    onDeleteClickListener.onDeleteClick(position)
+                }
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

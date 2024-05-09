@@ -1,33 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/popup_shape"
-    android:backgroundTint="#00FFFFFF">
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
         android:background="@drawable/dialog_outline"
-        android:orientation="vertical"
-        >
-
+        android:layout_margin="10dp"
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tvName"
+            android:id="@+id/textView9"
             android:layout_marginTop="10dp"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="Update vaccination record"
             android:layout_gravity="center"
-            android:text="Save appointment"
-            android:textAlignment="center"
             android:textStyle="italic"
-            android:textSize="30sp" />
-
+            android:gravity="center"
+            android:textSize="30sp"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout"
@@ -39,10 +33,9 @@
             app:hintEnabled="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:startIconDrawable="@drawable/ic_syringe_filled">>
-
+            app:startIconDrawable="@drawable/ic_syringe_filled">
             <AutoCompleteTextView
-                android:id="@+id/vaccNameForAppointmentACTV"
+                android:id="@+id/vaccinationNameUpdateACTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -53,30 +46,48 @@
                 app:dropDownBackgroundTint="@color/white" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <CheckBox
+            android:id="@+id/checkBoxUpdate"
+            android:layout_width="325dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Second dose taken"
+            android:textStyle="bold"
+            android:textColor="@color/main_cyan"/>
+
         <TextView
-            android:id="@+id/dateTV"
+            android:id="@+id/firstDDTV"
             android:layout_width="325dp"
             android:layout_height="45dp"
-            android:layout_gravity="center"
             android:layout_marginTop="16dp"
+            android:layout_gravity="center"
             android:background="@drawable/almost_square"
             android:gravity="center"
-            android:text="APPPOINTMENT DATE"
-            android:textAlignment="center" />
+            android:ems="10"
+            android:inputType="text"
+            android:text="FIRST DOSE DATE" />
 
+        <TextView
+            android:id="@+id/secondDDTV"
+            android:layout_width="325dp"
+            android:visibility="gone"
+            android:background="@drawable/almost_square"
+            android:layout_height="45dp"
+            android:layout_marginTop="16dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="SECOND DOSE DATE" />
 
         <Button
-            android:id="@+id/scheduleAppointmentBTN"
-            android:layout_width="150dp"
-            android:layout_height="48dp"
-            android:layout_gravity="center"
+            android:id="@+id/updateVRBTN"
             android:layout_marginTop="16dp"
             android:backgroundTint="@color/main_pink"
-            android:text="Add"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:text="Update"
             android:layout_marginBottom="10dp"
-            android:textAllCaps="false"
             />
-
     </LinearLayout>
-
 </RelativeLayout>

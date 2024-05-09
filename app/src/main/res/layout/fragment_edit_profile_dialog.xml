@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".dialogs.EditProfileDialogFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="10dp"
+        android:background="@drawable/dialog_outline">
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="Profile update"
+            android:textStyle="bold|italic"
+            android:textSize="16sp"/>
+
+        <EditText
+            android:id="@+id/updateNameEDTV"
+            style="@style/Widget.AppCompat.EditText"
+            android:layout_width="325dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/main_cyan"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="Name"
+            android:inputType="textEmailAddress"
+            android:textColorHint="@color/main_cyan" />
+
+        <TextView
+            android:id="@+id/updateDOBTV"
+            android:layout_marginTop="10dp"
+            android:layout_width="325dp"
+            android:layout_gravity="center"
+            android:background="@drawable/almost_square"
+            android:layout_height="45dp"
+            android:gravity="center"
+            android:text="Date of birth"
+            android:textColor="@color/main_cyan"/>
+
+        <Button
+            android:id="@+id/submitProfileUpdateBTN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/main_pink"
+            android:text="Submit" />
+    </LinearLayout>
+</RelativeLayout>

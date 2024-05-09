@@ -1,64 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
-    tools:context=".dialogs.QuestionSaveAppointmentDialogFragment">
+    tools:context=".dialogs.QuestionAddOrUpdateVaccRecDialogFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_margin="10dp"
-        android:background="@drawable/dialog_outline">
+        android:background="@drawable/dialog_outline"
+        >
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/textView10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_gravity="center"
-            android:text="Which dose of vaccination will this be?"
+            android:layout_marginTop="10dp"
+            android:text="What do you want to do?"
             android:textStyle="bold|italic"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            />
 
         <RadioGroup
-            android:layout_width="120dp"
+            android:layout_width="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center">
+            android:layout_gravity="center" >
 
             <RadioButton
-                android:id="@+id/firstDoseBTN"
-                android:layout_width="match_parent"
+                android:id="@+id/addNewVRBTN"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/main_cyan"
                 android:textStyle="bold"
-                android:text="First dose" />
+                android:text="Add new vaccination record" />
 
             <RadioButton
-                android:id="@+id/nextDoseBTN"
-                android:layout_width="match_parent"
+                android:id="@+id/updateNewVRBTN"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Update exsisting vaccination record"
                 android:textColor="@color/main_cyan"
-                android:textStyle="bold"
-                android:text="Next dose" />
+                android:textStyle="bold" />
+
         </RadioGroup>
 
         <Button
-            android:id="@+id/submitBtn"
+            android:id="@+id/submitAnswBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:backgroundTint="@color/main_pink"
-            android:layout_gravity="center"
             android:text="Submit" />
-
     </LinearLayout>
-
-
 </RelativeLayout>

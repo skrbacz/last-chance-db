@@ -55,7 +55,7 @@
             android:layout_marginTop="20dp"
             android:ems="10"
             android:gravity="start|top"
-            android:hint="Short descrtiption"
+            android:hint="Manufacturer"
             android:inputType="textMultiLine" />
 
         <Button

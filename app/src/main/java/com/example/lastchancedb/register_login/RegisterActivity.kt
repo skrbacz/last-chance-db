@@ -181,7 +181,8 @@ class RegisterActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
         val month = currentDate.get(Calendar.MONTH)
         val day = currentDate.get(Calendar.DAY_OF_MONTH)
 
-        val dialog = DatePickerDialog(this, this, year, month, day)
+        val dialog = DatePickerDialog(this, R.style.CustomCalendarDialogTheme, this, year, month, day,)
+        dialog.datePicker.firstDayOfWeek= Calendar.MONDAY
         dialog.datePicker.maxDate = currentDate.timeInMillis
         dialog.show()
     }

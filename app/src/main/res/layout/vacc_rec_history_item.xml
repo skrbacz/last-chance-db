@@ -32,9 +32,9 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="120dp"
                 android:layout_marginTop="43dp"
-                android:text="Vaccination Name"
+                android:textSize="17sp"
+                android:text="Vaccination name"
                 android:textColor="@color/white"
-                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="70dp"
                 android:layout_marginLeft="210dp"
-                android:text="2024-05-14"
+                android:text="TextView"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
 
@@ -88,6 +88,18 @@
                 android:text="TextView"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/deleteRecord"
+                android:layout_width="54dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="323dp"
+                android:layout_marginTop="115dp"
+                android:padding="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:srcCompat="@drawable/ic_trash_filled"
+                app:tint="@color/light_pink" />
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

@@ -1,8 +1,8 @@
 package com.example.lastchancedb.database.user
 
 data class User(
-    val name: String?= null,
-    val email: String?= null,
-    val dob: java.sql.Date?= null,
+    var name: String?= null,
+    var email: String?= null,
+    var dob: java.sql.Date?= null,
     val passwordId: Int?= null
 )

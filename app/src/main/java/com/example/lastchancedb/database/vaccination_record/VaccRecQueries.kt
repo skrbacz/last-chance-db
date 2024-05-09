@@ -87,7 +87,7 @@ class VaccRecQueries(private val connection: Connection): VaccRecDAO {
     }
 
     override fun updateVaccRec(id: Int, vaccRec: VaccinationRecord): Boolean {
-        val query = "{CALL updateVaccRec(?,?,?,?)}"
+        val query = "{CALL updateVaccRec(?,?,?,?,?)}"
 
         val callableStatement= connection.prepareCall(query)
         callableStatement.setInt(1, id)
@@ -101,7 +101,7 @@ class VaccRecQueries(private val connection: Connection): VaccRecDAO {
 
     private fun mapResultSetToVaccRec(resultSet: ResultSet): VaccinationRecord {
         return VaccinationRecord(
-//            id= resultSet.getInt("vaccRecId"),
+            id= resultSet.getInt("vaccinationRecordId"),
             userEmail= resultSet.getString("userEmail"),
             vaccName= resultSet.getString("vaccName"),
             dateAdministrated= resultSet.getDate("dateAdministrated"),

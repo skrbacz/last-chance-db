@@ -1,4 +1,4 @@
-package com.example.lastchancedb.recycler_view_activities.adapters
+package com.example.lastchancedb.other_activities.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lastchancedb.R
-import com.example.lastchancedb.recycler_view_activities.models.VaccModel
+import com.example.lastchancedb.other_activities.models.VaccModel
 
 class VaccLibraryAdapter(
     private val context: Context,

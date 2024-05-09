@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".recycler_view_activities.VaccinationLibraryActivity">
+    tools:context=".other_activities.VaccinationLibraryActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/vaccLibraryRV"
@@ -22,12 +22,26 @@
     <LinearLayout
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
         android:layout_height="44dp"
         android:background="@android:color/white"
         android:backgroundTint="@color/main_yellow"
         android:gravity="center"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/button_profile"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="8dp"
+            android:src="@drawable/ic_name"
+            app:tint="#F38AB3" />
 
         <ImageView
             android:id="@+id/button_home"
@@ -64,6 +78,7 @@
             android:src="@drawable/ic_syringe_filled"
             app:tint="#F38AB3" />
     </LinearLayout>
+
 
     <TextView
         android:id="@+id/textView"

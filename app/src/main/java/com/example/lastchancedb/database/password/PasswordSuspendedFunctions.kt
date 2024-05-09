@@ -29,7 +29,6 @@ object PasswordSuspendedFunctions {
         }
     }
 
-
     suspend fun deletePassword(passwordId: Int, context: Context){
         withContext(Dispatchers.IO) {
             val connection = DatabaseConnection.getConnection()
@@ -47,40 +46,5 @@ object PasswordSuspendedFunctions {
         }
     }
 
-    suspend fun updatePassword(passwordId: Int, password: Password, context: Context){
-        withContext(Dispatchers.IO) {
-            val connection = DatabaseConnection.getConnection()
-            val passwordQueries = PassswordQueries(connection)
-            val result = passwordQueries.updatePassword(passwordId, password)
-            connection.close()
 
-            withContext(Dispatchers.Main) {
-                if (result) {
-                    Toast.makeText(context, "Password updated", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(context, "Password update failed", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-    }
-
-    suspend fun getPassword(passwordId: Int): Password? {
-        return withContext(Dispatchers.IO) {
-            val connection = DatabaseConnection.getConnection()
-            val passwordQueries = PassswordQueries(connection)
-            val result = passwordQueries.getPassword(passwordId)
-            connection.close()
-            result
-        }
-    }
-
-    suspend fun getAllPasswords(): Set<Password?>? {
-        return withContext(Dispatchers.IO) {
-            val connection = DatabaseConnection.getConnection()
-            val passwordQueries = PassswordQueries(connection)
-            val result = passwordQueries.getAllPasswords()
-            connection.close()
-            result
-        }
-    }
 }

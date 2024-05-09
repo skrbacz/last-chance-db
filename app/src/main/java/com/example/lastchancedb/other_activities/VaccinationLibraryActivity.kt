@@ -1,4 +1,4 @@
-package com.example.lastchancedb.recycler_view_activities
+package com.example.lastchancedb.other_activities
 
 import android.content.Intent
 import android.content.res.ColorStateList
@@ -12,8 +12,8 @@ import com.example.lastchancedb.MainActivity
 import com.example.lastchancedb.R
 import com.example.lastchancedb.database.vaccination.Vaccination
 import com.example.lastchancedb.database.vaccination.VaccinationSuspendedFunctions
-import com.example.lastchancedb.recycler_view_activities.adapters.VaccLibraryAdapter
-import com.example.lastchancedb.recycler_view_activities.models.VaccModel
+import com.example.lastchancedb.other_activities.adapters.VaccLibraryAdapter
+import com.example.lastchancedb.other_activities.models.VaccModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -32,6 +32,7 @@ class VaccinationLibraryActivity : AppCompatActivity() {
 
         val bottomNavigationView = findViewById<LinearLayout>(R.id.bottom_navigation)
 
+        val buttonProfile= bottomNavigationView.findViewById<ImageView>(R.id.button_profile)
         val buttonHome = bottomNavigationView.findViewById<ImageView>(R.id.button_home)
         val buttonLibrary = bottomNavigationView.findViewById<ImageView>(R.id.button_library)
         val buttonStorage = bottomNavigationView.findViewById<ImageView>(R.id.button_storage)
@@ -47,6 +48,11 @@ class VaccinationLibraryActivity : AppCompatActivity() {
         buttonStorage.setOnClickListener {
             val intent =
                 Intent(this@VaccinationLibraryActivity, UserVaccRecStorageActivity::class.java)
+            startActivity(intent)
+        }
+
+        buttonProfile.setOnClickListener {
+            val intent = Intent(this@VaccinationLibraryActivity, ProfileActivity::class.java)
             startActivity(intent)
         }
 
@@ -66,7 +72,7 @@ class VaccinationLibraryActivity : AppCompatActivity() {
         for (vacc in vaccs!!) {
             if (vacc != null) {
                 vacc.name?.let {
-                    vacc.description?.let { it1 ->
+                    vacc.manufacturer?.let { it1 ->
                         vacc.daysUntilNextDose?.let { it2 ->
                             VaccModel(
                                 it, it2,

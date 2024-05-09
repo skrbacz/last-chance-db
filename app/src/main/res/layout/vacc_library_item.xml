@@ -36,33 +36,33 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="120dp"
-                android:layout_marginTop="20dp"
-                android:text="Vaccination Name"
+                android:layout_marginTop="43dp"
+                android:text="mmr (measeals, mumps, mabella)"
                 android:textColor="@color/white"
-                android:textSize="20sp"
+                android:textSize="17sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/vaccDesTVLib"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="72dp"
                 android:layout_marginLeft="120dp"
-                android:text="Description: "
+                android:layout_marginTop="90dp"
+                android:text="Manufacturer: "
                 android:textColor="@color/white"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textSize="15sp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/vaccIntTVLib"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="70dp"
                 android:layout_marginLeft="120dp"
-                android:text="Interval: "
+                android:text="Days between doses: "
                 android:textColor="@color/white"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textSize="15sp"
+                android:textStyle="bold"/>
 
             <ImageView
                 android:id="@+id/vaccImageLib"
@@ -76,22 +76,23 @@
 
             <TextView
                 android:id="@+id/vaccDescriptionTVLib"
-                android:layout_width="254dp"
-                android:layout_height="47dp"
-                android:layout_marginTop="95dp"
-                android:layout_marginLeft="120dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="220dp"
+                android:layout_marginTop="90dp"
                 android:text="TextView"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/vaccIntervalTVLib"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:layout_marginLeft="190dp"
+                android:layout_marginTop="70dp"
+                android:layout_marginLeft="270dp"
                 android:text="TextView"
                 android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:textSize="15sp" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

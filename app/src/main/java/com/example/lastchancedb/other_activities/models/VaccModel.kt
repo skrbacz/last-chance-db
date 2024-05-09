@@ -1,4 +1,4 @@
-package com.example.lastchancedb.recycler_view_activities.models
+package com.example.lastchancedb.other_activities.models
 
 class VaccModel(name: String, daysUntilNextDose: Int, description: String) {
 

@@ -34,12 +34,11 @@ class VaccQueries(private val connection: Connection): VaccDAO {
         val query = "{CALL insertVacc(?,?,?)}"
         val callableStatement = connection.prepareCall(query)
 
-        val lowercaseName = vacc.name?.lowercase(Locale.ROOT)
+        val uppercase = vacc.name?.uppercase(Locale.ROOT)
 
-        callableStatement.setString(1, lowercaseName)
-//        callableStatement.setString(2,vacc.producer)
+        callableStatement.setString(1, uppercase)
         vacc.daysUntilNextDose?.let { callableStatement.setInt(2, it) }
-        callableStatement.setString(3, vacc.description)
+        callableStatement.setString(3, vacc.manufacturer)
 
         val result = !callableStatement.execute()
         callableStatement.close()
@@ -59,9 +58,8 @@ class VaccQueries(private val connection: Connection): VaccDAO {
         val query = "{CALL updateVacc(?,?,?)}"
         val callableStatement = connection.prepareCall(query)
         callableStatement.setString(1, vacc.name)
-//        callableStatement.setString(2,vacc.producer)
         vacc.daysUntilNextDose?.let { callableStatement.setInt(2, it) }
-        callableStatement.setString(3,vacc.description)
+        callableStatement.setString(3,vacc.manufacturer)
         return callableStatement.executeUpdate() > 0
     }
 
@@ -70,7 +68,7 @@ class VaccQueries(private val connection: Connection): VaccDAO {
             name= resultSet.getString("name"),
 //            producer= resultSet.getString("producer"),
             daysUntilNextDose = resultSet.getInt("daysUntilNextDose"),
-            description = resultSet.getString("description")
+            manufacturer = resultSet.getString("manufacturer"),
         )
     }
 }
