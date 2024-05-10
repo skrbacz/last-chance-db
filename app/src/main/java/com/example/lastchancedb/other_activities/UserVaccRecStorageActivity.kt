@@ -87,19 +87,6 @@ class UserVaccRecStorageActivity : AppCompatActivity(), UserVaccRecStorageAdapte
      *
      * @param vaccinationRecords The set of user's vaccination records fetched from the database.
      */
-//    private fun setUpVaccRecModel(vaccinationRecords: Set<VaccinationRecord?>?) {
-//        vaccinationRecords?.forEach { vaccRec ->
-//            val vaccName = vaccRec?.vaccName ?: ""
-//            val vaccId = vaccRec?.id ?: -1
-//            val dateAdministrated = vaccRec?.dateAdministrated ?: java.sql.Date(0)
-//            val nextDoseDate = vaccRec?.nextDoseDate ?: java.sql.Date(0)
-//
-//            val vaccRecModel = VaccRecModel(vaccId, vaccName, dateAdministrated, nextDoseDate)
-//            vaccRecModels?.add(vaccRecModel)
-//        }
-//        recyclerView?.adapter?.notifyDataSetChanged()
-//    }
-
     private fun setUpVaccRecModel(vaccinationRecords: Set<VaccinationRecord?>?) {
         vaccinationRecords?.forEach { vaccRec ->
             val vaccName = vaccRec?.vaccName ?: ""
