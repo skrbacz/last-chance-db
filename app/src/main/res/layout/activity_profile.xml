@@ -261,7 +261,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
     <ImageView
-        android:id="@+id/button_profile"
+        android:id="@+id/button_profileP"
         android:layout_width="0dp"
         android:layout_height="44dp"
         android:layout_weight="1"

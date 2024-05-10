@@ -18,6 +18,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+/**
+ * An activity that serves as the main interface for administrators.
+ */
 class AdminMainActivity : AppCompatActivity() {
 
     private var toggleBtn: MaterialButtonToggleGroup?=null
@@ -98,6 +101,11 @@ class AdminMainActivity : AppCompatActivity() {
 
     }
 
+    /**
+     * Retrieves the number of users from the database.
+     *
+     * @return The number of users as a string.
+     */
     private fun getAmountOfUsers(): String {
         var users: Set<User?>? = null
         couritineScoupe.launch {
@@ -107,6 +115,10 @@ class AdminMainActivity : AppCompatActivity() {
         return size.toString()
     }
 
+
+    /**
+     * Hides admin action buttons.
+     */
     private fun invisibleButtons(){
         adminInsertBTN?.visibility = View.INVISIBLE
         adminDeleteBTN?.visibility = View.INVISIBLE
@@ -115,6 +127,10 @@ class AdminMainActivity : AppCompatActivity() {
         adminGetOneBTN?.visibility = View.INVISIBLE
     }
 
+
+    /**
+     * Displays admin action buttons.
+     */
     private fun visibleButtons(){
         adminInsertBTN?.visibility = View.VISIBLE
         adminDeleteBTN?.visibility = View.VISIBLE

@@ -8,17 +8,4 @@ class VaccRecModel(id: Int ,vaccName: String, dateAdministrated: Date?, nextDose
     var vaccName: String? = vaccName
     var dateAdministrated: Date? = dateAdministrated
     var nextDoseDueDate: Date? = nextDoseDueDate
-
-
-//    fun getVaccName(): String? {
-//        return vaccName
-//    }
-//
-//    fun getDateAdministrated(): Date? {
-//        return dateAdministrated
-//    }
-//
-//    fun getNextDoseDueDate(): Date? {
-//        return nextDoseDueDate
-//    }
 }

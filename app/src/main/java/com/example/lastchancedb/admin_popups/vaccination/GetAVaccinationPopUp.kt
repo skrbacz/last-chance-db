@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.lastchancedb.R
 
-//TODO: MAKE LAYOUT
+//TODO: NOT IMPLEMENTED
 class GetAVaccinationPopUp : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

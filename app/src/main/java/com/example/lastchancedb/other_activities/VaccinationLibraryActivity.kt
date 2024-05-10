@@ -18,7 +18,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-//TODO: items from nikola
+
+/**
+ * Activity for displaying a library of available vaccinations.
+ */
 class VaccinationLibraryActivity : AppCompatActivity() {
 
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
@@ -68,6 +71,11 @@ class VaccinationLibraryActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Sets up the vaccination models from the available vaccinations fetched from the database.
+     *
+     * @param vaccs The set of available vaccinations fetched from the database.
+     */
     private fun setUpVaccModel(vaccs: Set<Vaccination?>?) {
         for (vacc in vaccs!!) {
             if (vacc != null) {

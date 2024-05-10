@@ -6,8 +6,17 @@ import com.example.lastchancedb.database.DatabaseConnection
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
+/**
+ * Provides suspended functions to interact with the vaccination record database table.
+ */
 object VaccinationRecordSuspendedFunctions {
 
+    /**
+     * Inserts a new vaccination record into the database.
+     *
+     * @param vaccinationRecord The vaccination record to be inserted.
+     * @param context The context used to display toast messages.
+     */
     suspend fun insertVaccRec(vaccinationRecord: VaccinationRecord, context: Context) {
         withContext(Dispatchers.IO) {
             val connection = DatabaseConnection.getConnection()
@@ -29,6 +38,13 @@ object VaccinationRecordSuspendedFunctions {
         }
     }
 
+    /**
+     * Deletes a vaccination record from the database.
+     *
+     * @param id The ID of the vaccination record to be deleted.
+     * @param context The context used to display toast messages.
+     * @return True if the deletion was successful, false otherwise.
+     */
     suspend fun deleteVaccRec(id: Int, context: Context): Boolean {
        return withContext(Dispatchers.IO) {
             val connection = DatabaseConnection.getConnection()
@@ -50,6 +66,13 @@ object VaccinationRecordSuspendedFunctions {
         }
     }
 
+    /**
+     * Updates an existing vaccination record in the database.
+     *
+     * @param id The ID of the vaccination record to be updated.
+     * @param vaccRec The updated vaccination record.
+     * @param context The context used to display toast messages.
+     */
     suspend fun updateVaccRec(id: Int, vaccRec: VaccinationRecord, context: Context) {
         withContext(Dispatchers.IO) {
             val connection = DatabaseConnection.getConnection()
@@ -67,6 +90,12 @@ object VaccinationRecordSuspendedFunctions {
         }
     }
 
+    /**
+     * Retrieves a vaccination record from the database by its ID.
+     *
+     * @param id The ID of the vaccination record to retrieve.
+     * @return The retrieved vaccination record, or null if not found.
+     */
     suspend fun getVaccRec(id: Int): VaccinationRecord? {
         return withContext(Dispatchers.IO) {
             val connection = DatabaseConnection.getConnection()
@@ -77,6 +106,13 @@ object VaccinationRecordSuspendedFunctions {
         }
     }
 
+    /**
+     * Retrieves a vaccination record from the database by user email and vaccination name.
+     *
+     * @param email The email of the user associated with the vaccination record.
+     * @param vaccName The name of the vaccination.
+     * @return The retrieved vaccination record, or null if not found.
+     */
     suspend fun getVaccRecByUserEmailVaccName(email: String, vaccName: String): VaccinationRecord? {
         return withContext(Dispatchers.IO) {
             val connection = DatabaseConnection.getConnection()
@@ -87,6 +123,11 @@ object VaccinationRecordSuspendedFunctions {
         }
     }
 
+    /**
+     * Retrieves all vaccination records from the database.
+     *
+     * @return A set of all vaccination records, or null if no records found.
+     */
     suspend fun getAllVaccRec(): Set<VaccinationRecord?>? {
         return withContext(Dispatchers.IO) {
             val connection = DatabaseConnection.getConnection()
@@ -97,6 +138,12 @@ object VaccinationRecordSuspendedFunctions {
         }
     }
 
+    /**
+     * Retrieves all vaccination records associated with a user from the database.
+     *
+     * @param email The email of the user.
+     * @return A set of vaccination records associated with the user, or null if no records found.
+     */
     suspend fun getAllVaccRecByUserEmail(email: String): Set<VaccinationRecord?>? {
         return withContext(Dispatchers.IO) {
             val connection = DatabaseConnection.getConnection()

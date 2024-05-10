@@ -29,6 +29,11 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
+/**
+ * Dialog fragment for saving appointments for the first dose or next dose of vaccination.
+ *
+ * @param dose The type of dose to schedule the appointment for.
+ */
 class SaveAppointmentDialogFragment(private var dose: String) : DialogFragment(),
     DatePickerDialog.OnDateSetListener {
 
@@ -36,14 +41,21 @@ class SaveAppointmentDialogFragment(private var dose: String) : DialogFragment()
     private val binding get() = _binding!!
 
     private var scheduleBTN: Button? = null
+
     private var dateBtn: TextView? = null
-    private var date: Date? = null
+
+    private var selectedDate: Date? = null
+
     private var userEmail = Firebase.auth.currentUser?.email.toString()
 
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
-    private var selectedDate: Date? = null
+
     private var recommendedDate: java.sql.Date?= null
 
+    /**
+     * Called when the fragment is resumed. This method sets the dialog window dimensions
+     * and initializes the dropdown list based on the type of dose.
+     */
     override fun onResume() {
         super.onResume()
         val params= dialog?.window?.attributes
@@ -59,24 +71,37 @@ class SaveAppointmentDialogFragment(private var dose: String) : DialogFragment()
             }
         }
     }
-
+    /**
+     * Initializes the dropdown list with available vaccinations for the first dose.
+     */
     private suspend fun initFirstDose() {
         val vaccinations = VaccinationSuspendedFunctions.getAllVaccs()
         updateDropDownList(getVaccNamesFromVacc(vaccinations))
     }
-
+    /**
+     * Initializes the dropdown list with vaccinations that have no scheduled next dose.
+     */
     private suspend fun initNextDose() {
         val vaccRecs = VaccinationRecordSuspendedFunctions.getAllVaccRecByUserEmail(userEmail)
-        updateDropDownList(getVaccNamesFromVaccRec(vaccRecs))
+        val vaccRecNoNextDose = vaccRecs
+            ?.filter { it?.nextDoseDate == null }
+            ?.toSet()
+        updateDropDownList(getVaccNamesFromVaccRec(vaccRecNoNextDose))
     }
 
+
+    /**
+     * Updates the dropdown list with the given array of vaccination names.
+     */
     private fun updateDropDownList(names: Array<String>) {
         binding.apply {
             val arrayAdapter = ArrayAdapter(requireContext(), R.layout.drop_down_item, names)
             vaccNameForAppointmentACTV.setAdapter(arrayAdapter)
         }
     }
-
+    /**
+     * Retrieves the vaccination names from the given list of vaccinations.
+     */
     private fun getVaccNamesFromVacc(vaccinations: Set<Vaccination?>?): Array<String> {
         val vaccNames = mutableListOf<String>()
         vaccinations?.forEach { vacc ->
@@ -85,6 +110,9 @@ class SaveAppointmentDialogFragment(private var dose: String) : DialogFragment()
         return vaccNames.toTypedArray()
     }
 
+    /**
+     * Retrieves the vaccination names from the given list of vaccination records.
+     */
     private fun getVaccNamesFromVaccRec(vaccRecs: Set<VaccinationRecord?>?): Array<String> {
         val vaccNames = mutableListOf<String>()
         vaccRecs?.forEach { vaccRec ->
@@ -92,7 +120,9 @@ class SaveAppointmentDialogFragment(private var dose: String) : DialogFragment()
         }
         return vaccNames.toTypedArray()
     }
-
+    /**
+     * Creates and returns the view hierarchy associated with the fragment.
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -180,6 +210,9 @@ class SaveAppointmentDialogFragment(private var dose: String) : DialogFragment()
         return binding.root
     }
 
+    /**
+     * Opens a date picker dialog to select a date.
+     */
     private fun openDialog() {
         val currentDate = Calendar.getInstance()
         val year = currentDate.get(Calendar.YEAR)
@@ -189,6 +222,7 @@ class SaveAppointmentDialogFragment(private var dose: String) : DialogFragment()
         val dialog = DatePickerDialog(requireContext(), R.style.CustomCalendarDialogTheme, this, year, month, day)
         dialog.datePicker.firstDayOfWeek = Calendar.MONDAY
 
+        // Set minimum date based on the type of dose
         if (dose == "First dose") {
             dialog.datePicker.minDate = currentDate.timeInMillis
         } else if (dose == "Next dose") {
@@ -207,6 +241,14 @@ class SaveAppointmentDialogFragment(private var dose: String) : DialogFragment()
         dialog.show()
     }
 
+    /**
+     * Callback method when a date is set in the DatePickerDialog.
+     *
+     * @param view The DatePicker view associated with the dialog.
+     * @param year The selected year.
+     * @param monthOfYear The selected month (0-11 for compatibility with Calendar class).
+     * @param dayOfMonth The selected day of the month (1-31).
+     */
     override fun onDateSet(view: DatePicker?, year: Int, monthOfYear: Int, dayOfMonth: Int) {
         val calendar = Calendar.getInstance()
         calendar.set(year, monthOfYear, dayOfMonth)
@@ -216,11 +258,20 @@ class SaveAppointmentDialogFragment(private var dose: String) : DialogFragment()
         dateBtn?.text = formattedDate
     }
 
+    /**
+     * Formats the given date to a string representation.
+     *
+     * @param date The date to be formatted.
+     * @return The formatted date string.
+     */
     private fun formatDate(date: Date): String {
         val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         return sdf.format(date)
     }
-
+    /**
+     * Calculates the recommended date for the next dose appointment based on the
+     * average interval between doses and the date of administration of the previous dose.
+     */
     private fun getRecommendedDate(vaccinationRecord: VaccinationRecord?, averageInterval: Int) {
         val adminDateMillis = vaccinationRecord?.dateAdministrated?.time ?: 0L
         val daysUntilNextDose = averageInterval

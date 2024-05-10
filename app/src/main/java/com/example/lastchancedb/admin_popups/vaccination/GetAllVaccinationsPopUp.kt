@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.example.lastchancedb.R
 
-//TODO: MAKE LAYOUT
+//TODO: NOT IMPLEMENTED
 class GetAllVaccinationsPopUp : DialogFragment() {
 
     override fun onCreateView(

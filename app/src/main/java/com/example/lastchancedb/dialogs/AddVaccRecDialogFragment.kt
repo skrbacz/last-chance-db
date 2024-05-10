@@ -29,8 +29,12 @@ import java.sql.Date
 import java.util.Calendar
 import java.util.Locale
 
-//TODO: ADD adding next dose date
 
+/**
+ * Dialog fragment for adding vaccination records.
+ *
+ * This dialog allows users to add vaccination records including the date of the first dose and optionally the date of the second dose.
+ */
 class AddVaccRecDialogFragment() : DialogFragment(), DatePickerDialog.OnDateSetListener {
 
     private var userEmail = Firebase.auth.currentUser?.email.toString()
@@ -47,9 +51,16 @@ class AddVaccRecDialogFragment() : DialogFragment(), DatePickerDialog.OnDateSetL
 
     private var secondDate: Date? = null
     private var firstDate: Date? = null
+
     private var selectedDate: Date? = null
+    private var minDateInSecondDose: Date? = null
 
     private var selectedDateFlag: Int = 0
+
+    /**
+     * Called when the fragment is resumed. This method sets the dialog window dimensions
+     * and initializes the dropdown list based on the type of dose.
+     */
     override fun onResume() {
         super.onResume()
         val params = dialog?.window?.attributes
@@ -122,6 +133,37 @@ class AddVaccRecDialogFragment() : DialogFragment(), DatePickerDialog.OnDateSetL
                     }
 
                 }
+            } else {
+                secondDoseDateTV?.visibility = View.GONE
+                addBtn?.setOnClickListener {
+                    if (binding.vaccinationNameInsertACTV.text.isEmpty()) {
+                        Toast.makeText(
+                            requireContext(),
+                            "Please choose a vaccination",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else if (firstDate == null) {
+                        Toast.makeText(requireContext(), "Please choose a date", Toast.LENGTH_SHORT)
+                            .show()
+                    } else {
+                        coroutineScope.launch {
+                            val vaccRec = firstDate?.let { it1 ->
+                                VaccinationRecord(
+                                    null,
+                                    userEmail,
+                                    binding.vaccinationNameInsertACTV.text.toString(),
+                                    it1,
+                                    null
+                                )
+                            }
+                            VaccinationRecordSuspendedFunctions.insertVaccRec(
+                                vaccRec!!,
+                                requireContext()
+                            )
+                        }
+                    }
+
+                }
             }
         }
 
@@ -146,30 +188,43 @@ class AddVaccRecDialogFragment() : DialogFragment(), DatePickerDialog.OnDateSetL
                             null
                         )
                     }
-                    Log.d("vaccRec", vaccRec.toString())
                     VaccinationRecordSuspendedFunctions.insertVaccRec(
                         vaccRec!!,
                         requireContext()
                     )
                 }
             }
+
         }
 
 
-        firstDoseDateTV?.setOnClickListener{
+
+        firstDoseDateTV?.setOnClickListener {
             selectedDateFlag = 1
             openDialog()
         }
 
-        secondDoseDateTV?.setOnClickListener{
+
+
+        Log.d("min dose", minDateInSecondDose.toString())
+
+
+        secondDoseDateTV?.setOnClickListener {
             selectedDateFlag = 2
             openDialog()
         }
 
+
+
         return binding.root
     }
 
-
+    /**
+     * Formats the given date to a string representation.
+     *
+     * @param date The date to be formatted.
+     * @return The formatted date string.
+     */
     private fun openDialog() {
         val currentDate = Calendar.getInstance()
         val year = currentDate.get(Calendar.YEAR)
@@ -184,10 +239,24 @@ class AddVaccRecDialogFragment() : DialogFragment(), DatePickerDialog.OnDateSetL
             month,
             day,
         )
+
+        if(selectedDateFlag == 1){
+            dialog.datePicker.maxDate = System.currentTimeMillis()
+        }else if(selectedDateFlag == 2){
+            dialog.datePicker.minDate = minDateInSecondDose?.time ?: System.currentTimeMillis()
+        }
         dialog.datePicker.firstDayOfWeek = Calendar.MONDAY
         dialog.show()
     }
 
+    /**
+     * Callback method when a date is set in the DatePickerDialog.
+     *
+     * @param view The DatePicker view associated with the dialog.
+     * @param year The selected year.
+     * @param monthOfYear The selected month (0-11 for compatibility with Calendar class).
+     * @param dayOfMonth The selected day of the month (1-31).
+     */
     override fun onDateSet(view: DatePicker?, year: Int, monthOfYear: Int, dayOfMonth: Int) {
         val calendar = Calendar.getInstance()
         calendar.set(year, monthOfYear, dayOfMonth)
@@ -196,6 +265,7 @@ class AddVaccRecDialogFragment() : DialogFragment(), DatePickerDialog.OnDateSetL
         val formattedDate = formatDate(selectedDate!!)
         if (selectedDateFlag == 1) {
             firstDoseDateTV?.text = formattedDate
+            minDateInSecondDose = selectedDate
             firstDate = selectedDate
         } else if (selectedDateFlag == 2) {
             secondDoseDateTV?.text = formattedDate
@@ -203,12 +273,23 @@ class AddVaccRecDialogFragment() : DialogFragment(), DatePickerDialog.OnDateSetL
         }
     }
 
+    /**
+     * Format the given date into a string.
+     *
+     * @param date The date to format.
+     * @return The formatted date string.
+     */
     private fun formatDate(date: Date): String {
         val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         return sdf.format(date)
     }
 
-
+    /**
+     * Get vaccination names from the set of vaccinations read from the database.
+     *
+     * @param vaccinations The set of vaccinations.
+     * @return An array of vaccination names.
+     */
     private fun getVaccNames(vaccinations: Set<Vaccination?>?): Array<String> {
         val vaccNames = mutableListOf<String>()
         vaccinations?.forEach { vacc ->
@@ -216,4 +297,5 @@ class AddVaccRecDialogFragment() : DialogFragment(), DatePickerDialog.OnDateSetL
         }
         return vaccNames.toTypedArray()
     }
+
 }

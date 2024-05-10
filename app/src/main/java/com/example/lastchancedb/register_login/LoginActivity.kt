@@ -14,6 +14,9 @@ import com.example.lastchancedb.MainActivity
 import com.example.lastchancedb.R
 import com.google.firebase.auth.FirebaseAuth
 
+/**
+ * Activity for user login.
+ */
 class LoginActivity : AppCompatActivity() {
 
     var mAuth = FirebaseAuth.getInstance()
@@ -51,6 +54,7 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
+        // Simulate login with predefined credentials when logo is clicked
         cheat?.setOnClickListener {
             mAuth.signInWithEmailAndPassword("fire@base.com", "!Qwerty123")
                 .addOnCompleteListener { task ->
@@ -68,6 +72,11 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
+    /**
+     * Validates the user input for login.
+     *
+     * @return true if the input is valid, false otherwise.
+     */
     private fun validLogin(): Boolean {
         if(emailEDTV?.text.isNullOrBlank()){
             emailEDTV?.error = "Please enter your email"
@@ -89,6 +98,9 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
+    /**
+     * Attempts to login with the provided credentials.
+     */
     private fun login() {
         val email= emailEDTV?.text.toString().trim() { it <= ' ' }
         val password= passwordEDTV?.text.toString().trim() { it <= ' ' }
@@ -104,7 +116,9 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
     }
-
+    /**
+     * Navigates to the main activity after successful login.
+     */
     private fun goToMail(){
         val intent = Intent(this@LoginActivity, MainActivity::class.java)
         startActivity(intent)

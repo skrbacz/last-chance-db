@@ -34,6 +34,9 @@ import java.util.Locale
 import kotlin.math.abs
 import kotlin.math.max
 
+/**
+ * The main activity of the application, responsible for displaying the user interface and managing user interactions.
+ */
 class MainActivity : AppCompatActivity() {
 
     private val rotateOpen: Animation by lazy {
@@ -113,7 +116,7 @@ class MainActivity : AppCompatActivity() {
             closestVaccDate?.let { closestDate ->
                 val currentDate = Date()
                 val differenceDays = daysBetween(currentDate, closestDate)
-                val daysLeft = max(differenceDays.toInt(), 0) // Ensure daysLeft is not negative
+                val daysLeft = max(differenceDays.toInt(), 0) // Ensures daysLeft is not negative
                 Log.d("differenceDays", differenceDays.toString())
 
 
@@ -121,7 +124,7 @@ class MainActivity : AppCompatActivity() {
                 val progress = (differenceDays - daysLeft.toFloat()) / differenceDays
                 progressBar?.apply {
                     progressMax = 1f
-                    setProgressWithAnimation(progress, 2000) // Adjust animation duration as needed
+                    setProgressWithAnimation(progress, 2000)
                 }
             }
         }
@@ -172,12 +175,20 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    /**
+     * Toggles visibility and animations of the add buttons.
+     */
     private fun onAddButtonClicked() {
         setVisibility(clicked)
         setAnimation(clicked)
         clicked = !clicked
     }
 
+    /**
+     * Sets visibility of the add buttons.
+     *
+     * @param clicked Indicates if the buttons are clicked or not.
+     */
     private fun setVisibility(clicked: Boolean) {
         if (!clicked) {
             addVaccinationBtn?.visibility = View.VISIBLE
@@ -188,6 +199,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Sets animations of the add buttons.
+     *
+     * @param clicked Indicates if the buttons are clicked or not.
+     */
     private fun setAnimation(clicked: Boolean) {
         if (!clicked) {
             addButton?.startAnimation(rotateOpen)
@@ -200,6 +216,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Finds the closest vaccination record to the current date.
+     *
+     * @param vaccinationRecords The set of vaccination records.
+     */
     fun findClosestVaccinationRecord(vaccinationRecords: Set<VaccinationRecord?>?) {
         val currentDate = Calendar.getInstance()
         var closestRecord: VaccinationRecord? = null
@@ -213,7 +234,7 @@ class MainActivity : AppCompatActivity() {
                     closestRecord = record
                 }
             }
-            closestVaccName = closestRecord?.vaccName
+            closestVaccName = closestRecord?.vaccName?.uppercase()
             closestVaccDate = closestRecord?.nextDoseDate
             closestVaccDateString = closestVaccDate?.let { formatDate(it) }
         }else{
@@ -226,11 +247,25 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
+    /**
+     * Formats the given date to a string representation.
+     *
+     * @param date The date to be formatted.
+     * @return The formatted date string.
+     */
     private fun formatDate(date: java.sql.Date): String {
         val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         return sdf.format(date)
     }
 
+    /**
+     * Calculates the number of days between two dates.
+     *
+     * @param startDate The start date.
+     * @param endDate The end date.
+     * @return The number of days between the start and end dates.
+     */
     fun daysBetween(startDate: Date, endDate: Date): Float {
         val differenceMillis = endDate.time - startDate.time
         return differenceMillis / (1000f * 60 * 60 * 24)

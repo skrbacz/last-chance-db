@@ -10,7 +10,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import com.example.lastchancedb.databinding.FragmentQuestionScheduleAppointmentBinding
 
-
+/**
+ * A dialog fragment for asking whether to save an appointment for the first dose or next dose.
+ *
+ * This dialog allows users to choose between saving an appointment for the first dose or the next dose.
+ */
 class QuestionSaveAppointmentDialogFragment : DialogFragment() {
 
     private var _binding: FragmentQuestionScheduleAppointmentBinding? = null
@@ -27,8 +31,6 @@ class QuestionSaveAppointmentDialogFragment : DialogFragment() {
         params?.width = ViewGroup.LayoutParams.MATCH_PARENT
         params?.height = ViewGroup.LayoutParams.WRAP_CONTENT
         dialog?.window?.attributes = params
-
-
     }
 
     override fun onCreateView(
@@ -62,7 +64,9 @@ class QuestionSaveAppointmentDialogFragment : DialogFragment() {
 
         return binding.root
     }
-
+    /**
+     * Shows the save appointment dialog based on the selected dose type.
+     */
     fun showDialog() {
         val showDialog = selectedDoseType?.let { SaveAppointmentDialogFragment(it) }
         showDialog?.show((context as AppCompatActivity).supportFragmentManager, "dialog")

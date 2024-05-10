@@ -6,8 +6,17 @@ import com.example.lastchancedb.database.DatabaseConnection
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
+/**
+ * A collection of suspended functions for performing user-related database operations.
+ */
 object UserSuspendedFunctions {
 
+    /**
+     * Inserts a new user into the database.
+     *
+     * @param user The user object to insert.
+     * @param context The context used to display toast messages.
+     */
     suspend fun insertUser(user: User, context: Context) {
         withContext(Dispatchers.IO) {
             val connection = DatabaseConnection.getConnection()
@@ -25,6 +34,12 @@ object UserSuspendedFunctions {
         }
     }
 
+    /**
+     * Deletes a user from the database by email.
+     *
+     * @param email The email of the user to delete.
+     * @param context The context used to display toast messages.
+     */
     suspend fun deleteUser(email: String, context: Context) {
         withContext(Dispatchers.IO) {
             val connection = DatabaseConnection.getConnection()
@@ -43,6 +58,14 @@ object UserSuspendedFunctions {
 
     }
 
+
+    /**
+     * Updates an existing user in the database.
+     *
+     * @param email The email of the user to update.
+     * @param user The updated user object.
+     * @param context The context used to display toast messages.
+     */
     suspend fun updateUser(email: String, user: User, context: Context) {
         withContext(Dispatchers.IO) {
             val connection = DatabaseConnection.getConnection()
@@ -60,6 +83,12 @@ object UserSuspendedFunctions {
         }
     }
 
+    /**
+     * Retrieves a user from the database by email.
+     *
+     * @param email The email of the user to retrieve.
+     * @return The user object if found, otherwise null.
+     */
     suspend fun getUser(email: String): User? {
         return withContext(Dispatchers.IO) {
             val connection = DatabaseConnection.getConnection()
@@ -70,6 +99,11 @@ object UserSuspendedFunctions {
         }
     }
 
+    /**
+     * Retrieves all users from the database.
+     *
+     * @return A set containing all users if found, otherwise null.
+     */
     suspend fun getAllUsers(): Set<User?>? {
         return withContext(Dispatchers.IO) {
             val connection = DatabaseConnection.getConnection()

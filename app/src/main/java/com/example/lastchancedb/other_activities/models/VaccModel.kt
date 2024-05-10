@@ -1,25 +1,20 @@
 package com.example.lastchancedb.other_activities.models
 
-class VaccModel(name: String, daysUntilNextDose: Int, description: String) {
+/**
+ * Model class representing a vaccination item.
+ *
+ * @param name The name of the vaccination.
+ * @param daysUntilNextDose The number of days until the next dose is due.
+ * @param manufacturer A description of the vaccination.
+ */
+class VaccModel(name: String, daysUntilNextDose: Int, manufacturer: String) {
 
+    /** The name of the vaccination. */
     var name: String? = name
-//    var producer: String?= producer
-    var daysUntilNextDose: Int? = daysUntilNextDose
-    var description: String? = description
 
-//    fun getName(): String? {
-//        return name
-//    }
-//
-////    fun getProducer(): String? {
-////        return producer
-////    }
-//
-//    fun getDaysUntilNextDose(): Int? {
-//        return daysUntilNextDose
-//    }
-//
-//    fun getDescription(): String? {
-//        return description
-//    }
+    /** The number of days until the next dose is due. */
+    var daysUntilNextDose: Int? = daysUntilNextDose
+
+    /** A manufacturer of the vaccination. */
+    var manufacturer: String? = manufacturer
 }

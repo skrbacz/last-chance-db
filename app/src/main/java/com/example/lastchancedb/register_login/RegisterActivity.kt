@@ -25,6 +25,9 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
+/**
+ * Activity for user registration.
+ */
 class RegisterActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
 
     var auth = FirebaseAuth.getInstance()
@@ -78,6 +81,11 @@ class RegisterActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
         }
     }
 
+    /**
+     * Validates the user input for registration.
+     *
+     * @return true if the input is valid, false otherwise.
+     */
     private fun validRegisterInformation(): Boolean {
         if (nameEDTV?.text.toString().isBlank()) {
             nameEDTV?.error = "Please enter your name"
@@ -148,6 +156,9 @@ class RegisterActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
         return true
     }
 
+    /**
+     * Attempts to register the user with the provided information.
+     */
     private fun register() {
         val email: String = emailEDTV?.text.toString().trim() { it <= ' ' }
         val password: String = passwordEDTV?.text.toString().trim() { it <= ' ' }
@@ -165,16 +176,25 @@ class RegisterActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
             }
     }
 
+    /**
+     * Attempts to register the user with the provided information.
+     */
     private fun registrationSuccessful() {
         Toast.makeText(this@RegisterActivity, "Registration Successful", Toast.LENGTH_SHORT).show()
     }
 
+    /**
+     * Navigates to the login activity.
+     */
     private fun goToLogin() {
         val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
         startActivity(intent)
         finish()
     }
 
+    /**
+     * Opens the date picker dialog to select the date of birth.
+     */
     private fun openDialog() {
         val currentDate = Calendar.getInstance()
         val year = currentDate.get(Calendar.YEAR)
@@ -187,6 +207,15 @@ class RegisterActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
         dialog.show()
     }
 
+
+    /**
+     * Callback method when a date is set in the DatePickerDialog.
+     *
+     * @param view The DatePicker view associated with the dialog.
+     * @param year The selected year.
+     * @param monthOfYear The selected month (0-11 for compatibility with Calendar class).
+     * @param dayOfMonth The selected day of the month (1-31).
+     */
     override fun onDateSet(view: DatePicker?, year: Int, monthOfYear: Int, dayOfMonth: Int) {
         val calendar = Calendar.getInstance()
         calendar.set(year, monthOfYear, dayOfMonth)
@@ -196,13 +225,20 @@ class RegisterActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
         dobTV?.text = formattedDate
     }
 
+    /**
+     * Formats the given date to a string representation.
+     *
+     * @param date The date to be formatted.
+     * @return The formatted date string.
+     */
     private fun formatDate(date: java.sql.Date): String {
-        val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+        val sdf = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
         return sdf.format(date)
     }
 
-
-    //first we insert password to get the password id
+    /**
+     * Inserts the password into the database and returns the password id.
+     */
     private suspend fun insertPassword(): Int {
         val password: String = passwordEDTV?.text.toString().trim()
 
@@ -214,7 +250,9 @@ class RegisterActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
         }.await()
     }
 
-    //then we insert user
+    /**
+     * Inserts the user into the database.
+     */
     private suspend fun insertUser() {
         val name: String = nameEDTV?.text.toString().trim() { it <= ' ' }
         val email: String = emailEDTV?.text.toString().trim() { it <= ' ' }

@@ -21,7 +21,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-//TODO: adding/ updating
+
+/**
+ * Activity for displaying user's vaccination records and providing options for deleting them.
+ */
 class UserVaccRecStorageActivity : AppCompatActivity(), UserVaccRecStorageAdapter.OnDeleteClickListener {
 
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
@@ -79,6 +82,24 @@ class UserVaccRecStorageActivity : AppCompatActivity(), UserVaccRecStorageAdapte
         }
     }
 
+    /**
+     * Sets up the vaccination record models from the database records.
+     *
+     * @param vaccinationRecords The set of user's vaccination records fetched from the database.
+     */
+//    private fun setUpVaccRecModel(vaccinationRecords: Set<VaccinationRecord?>?) {
+//        vaccinationRecords?.forEach { vaccRec ->
+//            val vaccName = vaccRec?.vaccName ?: ""
+//            val vaccId = vaccRec?.id ?: -1
+//            val dateAdministrated = vaccRec?.dateAdministrated ?: java.sql.Date(0)
+//            val nextDoseDate = vaccRec?.nextDoseDate ?: java.sql.Date(0)
+//
+//            val vaccRecModel = VaccRecModel(vaccId, vaccName, dateAdministrated, nextDoseDate)
+//            vaccRecModels?.add(vaccRecModel)
+//        }
+//        recyclerView?.adapter?.notifyDataSetChanged()
+//    }
+
     private fun setUpVaccRecModel(vaccinationRecords: Set<VaccinationRecord?>?) {
         vaccinationRecords?.forEach { vaccRec ->
             val vaccName = vaccRec?.vaccName ?: ""
@@ -89,9 +110,18 @@ class UserVaccRecStorageActivity : AppCompatActivity(), UserVaccRecStorageAdapte
             val vaccRecModel = VaccRecModel(vaccId, vaccName, dateAdministrated, nextDoseDate)
             vaccRecModels?.add(vaccRecModel)
         }
+
+        // Sort the list based on date administrated in ascending order
+        vaccRecModels?.sortBy { it.dateAdministrated }
+
         recyclerView?.adapter?.notifyDataSetChanged()
     }
 
+    /**
+     * Handles the deletion of vaccination records.
+     *
+     * @param position The position of the vaccination record to be deleted.
+     */
     override fun onDeleteClick(position: Int) {
         val vaccinationRecord = vaccRecModels?.get(position)
 

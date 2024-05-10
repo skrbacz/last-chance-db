@@ -18,6 +18,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+/**
+ * Activity for displaying user profile information and providing options for editing profile and logging out.
+ */
 class ProfileActivity : AppCompatActivity() {
 
     private var userEmail = Firebase.auth.currentUser?.email.toString()
@@ -32,6 +35,9 @@ class ProfileActivity : AppCompatActivity() {
 
     private var coroutineScope= CoroutineScope(Dispatchers.Main)
 
+    /**
+     * Refreshes the user profile information when the activity is resumed.
+     */
     override fun onResume() {
         super.onResume()
         coroutineScope.launch {
@@ -53,14 +59,14 @@ class ProfileActivity : AppCompatActivity() {
 
         val bottomNavigationView = findViewById<LinearLayout>(R.id.bottom_navigation)
 
-        val buttonProfile= bottomNavigationView.findViewById<ImageView>(R.id.button_profile)
+        val buttonProfile= bottomNavigationView.findViewById<ImageView>(R.id.button_profileP)
         val buttonHome = bottomNavigationView.findViewById<ImageView>(R.id.button_home)
         val buttonLibrary = bottomNavigationView.findViewById<ImageView>(R.id.button_library)
         val buttonStorage = bottomNavigationView.findViewById<ImageView>(R.id.button_storage)
         val clicked = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.main_pink))
 
 
-        buttonProfile.backgroundTintList = clicked
+        buttonProfile.imageTintList = clicked
 
         buttonHome.setOnClickListener {
             val intent = Intent(this@ProfileActivity, MainActivity::class.java)
@@ -95,6 +101,9 @@ class ProfileActivity : AppCompatActivity() {
 
     }
 
+    /**
+     * Navigates to the login activity.
+     */
     private fun goToLogin() {
         val intent = Intent(this@ProfileActivity, LoginActivity::class.java)
         startActivity(intent)

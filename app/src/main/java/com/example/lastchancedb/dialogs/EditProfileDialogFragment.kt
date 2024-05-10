@@ -23,6 +23,11 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
+/**
+ * A dialog fragment for editing user profile information.
+ *
+ * This dialog allows users to edit their name and date of birth (DOB).
+ */
 class EditProfileDialogFragment : DialogFragment(), DatePickerDialog.OnDateSetListener {
 
     private var userEmail = Firebase.auth.currentUser?.email.toString()
@@ -81,7 +86,9 @@ class EditProfileDialogFragment : DialogFragment(), DatePickerDialog.OnDateSetLi
     }
 
 
-
+    /**
+     * Opens a date picker dialog for selecting the date of birth.
+     */
     private fun openDialog() {
         val currentDate = Calendar.getInstance()
         val year = currentDate.get(Calendar.YEAR)
@@ -109,7 +116,12 @@ class EditProfileDialogFragment : DialogFragment(), DatePickerDialog.OnDateSetLi
 
         dobTV?.text = formattedDate
     }
-
+    /**
+     * Formats the given date into a string.
+     *
+     * @param date The date to format.
+     * @return The formatted date string.
+     */
     private fun formatDate(date: Date): String {
         val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         return sdf.format(date)

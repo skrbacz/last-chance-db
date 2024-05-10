@@ -9,7 +9,11 @@ import android.widget.RadioButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import com.example.lastchancedb.databinding.FragmentQuestionAddOrUpdateVaccRecordBinding
-
+/**
+ * A dialog fragment for asking whether to add or update a vaccination record.
+ *
+ * This dialog allows users to choose between adding a new vaccination record or updating an existing one.
+ */
 class QuestionAddOrUpdateVaccRecDialogFragment : DialogFragment() {
 
     private var _binding: FragmentQuestionAddOrUpdateVaccRecordBinding? = null
